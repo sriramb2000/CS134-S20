@@ -59,7 +59,7 @@ const DeadPings = 5
 
 type PingArgs struct {
 	Me      string // "host:port"
-	Viewnum uint   // caller's notion of current view #
+	Viewnum uint   // caller's notion of current view # // todo: you'll need to keep track of whether the primary for the current view has acknowledged it (in PingArgs.Viewnum).
 }
 
 type PingReply struct {

@@ -50,7 +50,7 @@ func Test1(t *testing.T) {
 	}
 
 	// very first primary
-	fmt.Printf("Test: First primary ...\n")
+	fmt.Printf("Test1: First primary ...\n")
 
 	for i := 0; i < DeadPings*2; i++ {
 		view, _ := ck1.Ping(0)
@@ -63,7 +63,7 @@ func Test1(t *testing.T) {
 	fmt.Printf("  ... Passed\n")
 
 	// very first backup
-	fmt.Printf("Test: First backup ...\n")
+	fmt.Printf("Test2: First backup ...\n")
 
 	{
 		vx, _ := ck1.Get()
@@ -80,7 +80,7 @@ func Test1(t *testing.T) {
 	fmt.Printf("  ... Passed\n")
 
 	// primary dies, backup should take over
-	fmt.Printf("Test: Backup takes over if primary fails ...\n")
+	fmt.Printf("Test3: Backup takes over if primary fails ...\n")
 
 	{
 		ck1.Ping(2)
@@ -97,7 +97,7 @@ func Test1(t *testing.T) {
 	fmt.Printf("  ... Passed\n")
 
 	// revive ck1, should become backup
-	fmt.Printf("Test: Restarted server becomes backup ...\n")
+	fmt.Printf("Test4: Restarted server becomes backup ...\n")
 
 	{
 		vx, _ := ck2.Get()
@@ -118,7 +118,7 @@ func Test1(t *testing.T) {
 	// should become the server, and ck3 the backup.
 	// this should happen in a single view change, without
 	// any period in which there's no backup.
-	fmt.Printf("Test: Idle third server becomes backup if primary fails ...\n")
+	fmt.Printf("Test5: Idle third server becomes backup if primary fails ...\n")
 
 	{
 		vx, _ := ck2.Get()
@@ -138,7 +138,7 @@ func Test1(t *testing.T) {
 
 	// kill and immediately restart the primary -- does viewservice
 	// conclude primary is down even though it's pinging?
-	fmt.Printf("Test: Restarted primary treated as dead ...\n")
+	fmt.Printf("Test6: Restarted primary treated as dead ...\n")
 
 	{
 		vx, _ := ck1.Get()
@@ -159,7 +159,7 @@ func Test1(t *testing.T) {
 	}
 	fmt.Printf("  ... Passed\n")
 
-	fmt.Printf("Test: Dead backup is removed from view ...\n")
+	fmt.Printf("Test7: Dead backup is removed from view ...\n")
 
 	// set up a view with just 3 as primary,
 	// to prepare for the next test.
@@ -178,7 +178,7 @@ func Test1(t *testing.T) {
 
 	// does viewserver wait for ack of previous view before
 	// starting the next one?
-	fmt.Printf("Test: Viewserver waits for primary to ack view ...\n")
+	fmt.Printf("Test8: Viewserver waits for primary to ack view ...\n")
 
 	{
 		// set up p=ck3 b=ck1, but
@@ -210,7 +210,7 @@ func Test1(t *testing.T) {
 
 	// if old servers die, check that a new (uninitialized) server
 	// cannot take over.
-	fmt.Printf("Test: Uninitialized server can't become primary ...\n")
+	fmt.Printf("Test9: Uninitialized server can't become primary ...\n")
 
 	{
 		for i := 0; i < DeadPings*2; i++ {
