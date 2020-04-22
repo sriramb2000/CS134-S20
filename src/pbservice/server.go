@@ -22,6 +22,8 @@ type PBServer struct {
 	me         string
 	vs         *viewservice.Clerk
 	// Your declarations here.
+	currView   viewservice.View
+	db		   map[string]string
 }
 
 
@@ -49,7 +51,29 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 //   manage transfer of state from primary to new backup.
 //
 func (pb *PBServer) tick() {
+	pb.mu.Lock()
+	defer pb.mu.Unlock()
 
+	nextView, err := pb.vs.Ping(pb.currView.Viewnum)
+	if (err != nil) {
+		fmt.Errorf("Failed Ping(%v)", pb.currview.Viewnum)
+	} else if (nextView.Viewnum == pb.currView.Viewnum) {
+		log.Printf("Ping(%v) is up to date", pb.currView.Viewnum)
+		return 
+	}
+
+	dbSync := false
+
+	// Determine whether or not we need to do a DB Sync
+	if (nextView.Primary == pb.me && nextView.Backup != "" && currView.Backup != nextView.Backup) {
+		dbSync = true
+	}
+
+	if (dbSync) {
+		// Do dbSync with new backup
+	}
+
+	pb.currView = nextView
 	// Your code here.
 }
 
