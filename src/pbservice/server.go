@@ -166,7 +166,7 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 	return nil
 }
 
-func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply, res *string) error {
+func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 
 	// Your code here.
 	pb.mu.Lock()
