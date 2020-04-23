@@ -35,11 +35,11 @@ type PBServer struct {
 // Helpers
 
 func (pb *PBServer) IsPrimary() bool {
-	return currView.Primary == pb.me
+	return pb.currView.Primary == pb.me
 }
 
 func (pb *PBServer) IsBackup() bool {
-	return currView.Backup == pb.me
+	return pb.currView.Backup == pb.me
 }
 
 func (pb *PBServer) IsDuplicateGet(args *GetArgs) bool {
@@ -106,6 +106,30 @@ func (pb *PBServer) ApplyPutAppend(args *PutAppendArgs, reply *PutAppendReply) e
 
 // RPCs
 
+func (pb *PBServer) BackupGet(args *GetArgs, reply *GetReply) error {
+	pb.mu.Lock()
+	defer pb.mu.Unlock()
+	// Double Check that this Server is the Primary
+	if (!pb.IsBackup()) {
+		reply.Err = ErrWrongServer
+		return nil
+	}
+
+	// Check if request is duplicate - although duplicate requests won't be forwarded
+	if (pb.IsDuplicateGet(args)) {
+		record, _ = pb.txnHistory[args.ID]
+		reply.Value = record.value
+		reply.Err = OK
+		return nil
+	}
+
+	// Apply Get
+	pb.ApplyGet(args, reply)
+	
+	// Return
+	return nil
+}
+
 func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 
 	// Your code here.
@@ -126,13 +150,49 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 	}
 
 	// Apply Get
-	pb.ApplyGet(args)
+	pb.ApplyGet(args, reply)
 
-	// TODO: Forward to Duplicate if possible
+	// Forward to Duplicate if possible
+	if (pb.currView.Backup != "") {
+		ok := call(pb.currView.Backup, "PBServer.BackupGet", args, &reply)
+		// If failure or data inconsistency, re-sync necessary since either Backup has changed
+		// or the Databases are out of sync (perhaps an undetected Backup restart)
+		if (!ok || reply.Err == ErrWrongServer || reply.Value != pb.db[args.Key]) {
+			pb.dbSyncFlag = true
+		}
+	}
 	
 	// Return
 	return nil
 }
+
+func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply, res *string) error {
+
+	// Your code here.
+	pb.mu.Lock()
+	defer pb.mu.Unlock()
+
+	// Double Check that this Server is the Primary
+	if (!pb.IsBackup()) {
+		reply.Err = ErrWrongServer
+		return nil
+	}
+
+	// Check if request is duplicate - although duplicate requests won't be forwarded
+	if (pb.IsDuplicatePutAppend(args)) {
+		reply.Err = OK
+		return nil
+	}
+
+	// Apply PutAppend
+	pb.ApplyPutAppend(args, reply)
+
+	res = pb.db[args.Key]
+	
+	// Return
+	return nil
+}
+
 
 
 func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
@@ -154,10 +214,19 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 	}
 
 	// Apply PutAppend
-	pb.ApplyPutAppend(args)
+	pb.ApplyPutAppend(args, reply)
 
 	// TODO: Forward to Duplicate if possible
-	
+	if (pb.currView.Backup != "") {
+		var res string
+		ok := call(pb.currView.Backup, "PBServer.BackupPutAppend", args, &reply, &res)
+		// If failure or data inconsistency, re-sync necessary since either Backup has changed
+		// or the Databases are out of sync (perhaps an undetected Backup restart)
+		if (!ok || reply.Err == ErrWrongServer || (reply.Err != OK && res != pb.db[args.Key])) {
+			pb.dbSyncFlag = true
+		}
+	}
+
 	// Return
 
 	return nil
@@ -182,19 +251,16 @@ func (pb *PBServer) tick() {
 		return 
 	}
 
-	dbSyncFlag := false
-
 	// Determine whether or not we need to do a DB Sync
 	if (nextView.Primary == pb.me && nextView.Backup != "" && currView.Backup != nextView.Backup) {
-		dbSyncFlag = true
+		pb.dbSyncFlag = true
 	}
 
-	if (dbSyncFlag) {
+	if (pb.dbSyncFlag) {
 		// Do dbSync with new backup
 	}
 
 	pb.currView = nextView
-	// Your code here.
 }
 
 // tell the server to shut itself down.
