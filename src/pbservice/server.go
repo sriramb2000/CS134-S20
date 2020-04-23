@@ -232,6 +232,28 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 	return nil
 }
 
+func (pb *PBServer) BackupSync(args *SyncArgs, reply *SyncReply) error {
+	nextView, err := pb.vs.Ping(pb.currView.Viewnum)
+	if (err != nil) {
+		fmt.Errorf("Failed Ping(%v)", pb.currview.Viewnum)
+	}
+
+	pb.currView = nextView
+	
+	if (!pb.IsBackup()) {
+		reply.Err = ErrWrongServer
+		return nil
+	}
+
+	db, history := args.DB, args.History 
+
+	pb.db = db
+	pb.txnHistory = history
+
+	reply.Err = OK
+
+	return nil
+}
 
 //
 // ping the viewserver periodically.
@@ -256,8 +278,14 @@ func (pb *PBServer) tick() {
 		pb.dbSyncFlag = true
 	}
 
-	if (pb.dbSyncFlag) {
+	if (pb.dbSyncFlag && pb.currView.Backup != "") {
 		// Do dbSync with new backup
+		args := SyncArgs{DB: pb.db, History: pb.txnHistory}
+		var reply SyncReply
+		ok := call(pb.currView.Backup, "PBServer.BackupSync", &args, &reply)
+		if (ok && reply.Err == OK) {
+			pb.dbSyncFlag = true
+		}
 	}
 
 	pb.currView = nextView

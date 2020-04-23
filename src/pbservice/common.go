@@ -38,3 +38,11 @@ type GetReply struct {
 
 
 // Your RPC definitions here.
+type SyncArgs struct {
+	History	map[int64]TxnRecord
+	DB	    map[string]string
+}
+
+type SyncReply struct {
+	Err	  Err
+}
