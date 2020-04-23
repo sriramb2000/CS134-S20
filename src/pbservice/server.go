@@ -240,14 +240,14 @@ func (pb *PBServer) BackupSync(args *SyncArgs, reply *SyncReply) error {
 		reply.Err = ErrWrongServer
 		return nil
 	}
-	log.Println("Valid Backup Sync received: ", pb.db)
+	log.Println("Valid Backup Sync received.")
 
 	db, history := args.DB, args.History 
 
 	pb.db = db
 	pb.txnHistory = history
 
-	log.Println("Sync success: ", pb.db)
+	log.Println("Sync success.")
 	
 	reply.Err = OK
 
