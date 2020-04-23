@@ -22,7 +22,7 @@ type PutAppendArgs struct {
 
 type PutAppendReply struct {
 	Err Err
-	BackupValue string
+	BackupValue string // For Backup Forwarding Consistency Only
 }
 
 type GetArgs struct {
