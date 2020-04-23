@@ -57,7 +57,7 @@ func (pb *PBServer) IsDuplicatePutAppend(args *PutAppendArgs) bool {
 	id, key, val, txnType := args.ID, args.Key, args.Value, args.TxnType
 	record, ok := pb.txnHistory[id]
 
-	if (ok && record.key == key && record.txnType == txnType) {
+	if (ok && record.key == key && record.value == val && record.txnType == txnType) {
 		return true
 	}
 
@@ -117,7 +117,7 @@ func (pb *PBServer) BackupGet(args *GetArgs, reply *GetReply) error {
 
 	// Check if request is duplicate - although duplicate requests won't be forwarded
 	if (pb.IsDuplicateGet(args)) {
-		record, _ = pb.txnHistory[args.ID]
+		record, _ := pb.txnHistory[args.ID]
 		reply.Value = record.value
 		reply.Err = OK
 		return nil
@@ -143,7 +143,7 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 
 	// Check if request is duplicate
 	if (pb.IsDuplicateGet(args)) {
-		record, _ = pb.txnHistory[args.ID]
+		record, _ := pb.txnHistory[args.ID]
 		reply.Value = record.value
 		reply.Err = OK
 		return nil
@@ -154,7 +154,7 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 
 	// Forward to Duplicate if possible
 	if (pb.currView.Backup != "") {
-		ok := call(pb.currView.Backup, "PBServer.BackupGet", args, &reply)
+		ok := call(pb.currView.Backup, "PBServer.BackupGet", args, reply)
 		// If failure or data inconsistency, re-sync necessary since either Backup has changed
 		// or the Databases are out of sync (perhaps an undetected Backup restart)
 		if (!ok || reply.Err == ErrWrongServer || reply.Value != pb.db[args.Key]) {
@@ -187,7 +187,7 @@ func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply, 
 	// Apply PutAppend
 	pb.ApplyPutAppend(args, reply)
 
-	res = pb.db[args.Key]
+	reply.BackupValue = pb.db[args.Key]
 	
 	// Return
 	return nil
@@ -218,11 +218,10 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 
 	// TODO: Forward to Duplicate if possible
 	if (pb.currView.Backup != "") {
-		var res string
-		ok := call(pb.currView.Backup, "PBServer.BackupPutAppend", args, &reply, &res)
+		ok := call(pb.currView.Backup, "PBServer.BackupPutAppend", args, reply)
 		// If failure or data inconsistency, re-sync necessary since either Backup has changed
 		// or the Databases are out of sync (perhaps an undetected Backup restart)
-		if (!ok || reply.Err == ErrWrongServer || (reply.Err != OK && res != pb.db[args.Key])) {
+		if (!ok || reply.Err == ErrWrongServer || (reply.Err != OK && reply.BackupValue != pb.db[args.Key])) {
 			pb.dbSyncFlag = true
 		}
 	}
@@ -235,7 +234,7 @@ func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error 
 func (pb *PBServer) BackupSync(args *SyncArgs, reply *SyncReply) error {
 	nextView, err := pb.vs.Ping(pb.currView.Viewnum)
 	if (err != nil) {
-		fmt.Errorf("Failed Ping(%v)", pb.currview.Viewnum)
+		fmt.Errorf("Failed Ping(%v)", pb.currView.Viewnum)
 	}
 
 	pb.currView = nextView
@@ -267,14 +266,14 @@ func (pb *PBServer) tick() {
 
 	nextView, err := pb.vs.Ping(pb.currView.Viewnum)
 	if (err != nil) {
-		fmt.Errorf("Failed Ping(%v)", pb.currview.Viewnum)
+		fmt.Errorf("Failed Ping(%v)", pb.currView.Viewnum)
 	} else if (nextView.Viewnum == pb.currView.Viewnum) {
 		log.Printf("Ping(%v) is up to date", pb.currView.Viewnum)
 		return 
 	}
 
 	// Determine whether or not we need to do a DB Sync
-	if (nextView.Primary == pb.me && nextView.Backup != "" && currView.Backup != nextView.Backup) {
+	if (nextView.Primary == pb.me && nextView.Backup != "" && pb.currView.Backup != nextView.Backup) {
 		pb.dbSyncFlag = true
 	}
 
