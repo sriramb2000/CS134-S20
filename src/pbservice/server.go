@@ -13,9 +13,9 @@ import "syscall"
 import "math/rand"
 
 type TxnRecord struct {
-	key		   string
-	value	   string
-	txnType     string
+	Key		   string
+	Value	   string
+	TxnType     string
 }
 
 type PBServer struct {
@@ -46,7 +46,7 @@ func (pb *PBServer) IsDuplicateGet(args *GetArgs) bool {
 	id, key, txnType := args.ID, args.Key, args.TxnType
 	record, ok := pb.txnHistory[id]
 
-	if (ok && record.key == key && record.txnType == txnType) {
+	if (ok && record.Key == key && record.TxnType == txnType) {
 		return true
 	}
 
@@ -57,7 +57,7 @@ func (pb *PBServer) IsDuplicatePutAppend(args *PutAppendArgs) bool {
 	id, key, val, txnType := args.ID, args.Key, args.Value, args.TxnType
 	record, ok := pb.txnHistory[id]
 
-	if (ok && record.key == key && record.value == val && record.txnType == txnType) {
+	if (ok && record.Key == key && record.Value == val && record.TxnType == txnType) {
 		return true
 	}
 
@@ -81,7 +81,7 @@ func (pb *PBServer) ApplyGet(args *GetArgs, reply *GetReply) error {
 	// Value not in DB
 	// Key note: Value here is not being used to store the request arguments
 	// Instead it is being used to store the value that this particular get returned
-	pb.txnHistory[id] = TxnRecord{key: key, value: entry, txnType: txnType}
+	pb.txnHistory[id] = TxnRecord{Key: key, Value: entry, TxnType: txnType}
 	return nil
 }
 
@@ -100,15 +100,14 @@ func (pb *PBServer) ApplyPutAppend(args *PutAppendArgs, reply *PutAppendReply) e
 	}
 
 	// Value not in DB
-	pb.txnHistory[id] = TxnRecord{key: key, value: val, txnType: txnType}
+	pb.txnHistory[id] = TxnRecord{Key: key, Value: val, TxnType: txnType}
 	return nil
 }
 
 // RPCs
 
 func (pb *PBServer) BackupGet(args *GetArgs, reply *GetReply) error {
-	pb.mu.Lock()
-	defer pb.mu.Unlock()
+     	//log.Printf("Backup Get for %s received.", args.Key)
 	// Double Check that this Server is the Primary
 	if (!pb.IsBackup()) {
 		reply.Err = ErrWrongServer
@@ -118,7 +117,7 @@ func (pb *PBServer) BackupGet(args *GetArgs, reply *GetReply) error {
 	// Check if request is duplicate - although duplicate requests won't be forwarded
 	if (pb.IsDuplicateGet(args)) {
 		record, _ := pb.txnHistory[args.ID]
-		reply.Value = record.value
+		reply.Value = record.Value
 		reply.Err = OK
 		return nil
 	}
@@ -131,7 +130,7 @@ func (pb *PBServer) BackupGet(args *GetArgs, reply *GetReply) error {
 }
 
 func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
-
+     	// log.Printf("Get for %s received.", args.Key)
 	// Your code here.
 	pb.mu.Lock()
 	defer pb.mu.Unlock()
@@ -144,7 +143,7 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 	// Check if request is duplicate
 	if (pb.IsDuplicateGet(args)) {
 		record, _ := pb.txnHistory[args.ID]
-		reply.Value = record.value
+		reply.Value = record.Value
 		reply.Err = OK
 		return nil
 	}
@@ -167,10 +166,8 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 }
 
 func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
-
+   	// log.Printf("Backup Put for %s,%s received.", args.Key, args.Value)
 	// Your code here.
-	pb.mu.Lock()
-	defer pb.mu.Unlock()
 
 	// Double Check that this Server is the Primary
 	if (!pb.IsBackup()) {
@@ -196,7 +193,7 @@ func (pb *PBServer) BackupPutAppend(args *PutAppendArgs, reply *PutAppendReply) 
 
 
 func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
-
+     	// log.Printf("Put for %s,%s received.", args.Key, args.Value)
 	// Your code here.
 	pb.mu.Lock()
 	defer pb.mu.Unlock()
@@ -243,12 +240,15 @@ func (pb *PBServer) BackupSync(args *SyncArgs, reply *SyncReply) error {
 		reply.Err = ErrWrongServer
 		return nil
 	}
+	log.Println("Valid Backup Sync received: ", pb.db)
 
 	db, history := args.DB, args.History 
 
 	pb.db = db
 	pb.txnHistory = history
 
+	log.Println("Sync success: ", pb.db)
+	
 	reply.Err = OK
 
 	return nil
@@ -269,6 +269,11 @@ func (pb *PBServer) tick() {
 		fmt.Errorf("Failed Ping(%v)", pb.currView.Viewnum)
 	} else if (nextView.Viewnum == pb.currView.Viewnum) {
 		log.Printf("Ping(%v) is up to date", pb.currView.Viewnum)
+		/*if (pb.me == nextView.Primary) {
+		   log.Printf("Primary: ")
+		} else if (pb.me == nextView.Backup){
+		   log.Println("Backup: ", pb.db)
+		}*/
 		return 
 	}
 
@@ -277,11 +282,11 @@ func (pb *PBServer) tick() {
 		pb.dbSyncFlag = true
 	}
 
-	if (pb.dbSyncFlag && pb.currView.Backup != "") {
+	if (pb.dbSyncFlag && nextView.Backup != "") {
 		// Do dbSync with new backup
 		args := SyncArgs{DB: pb.db, History: pb.txnHistory}
 		var reply SyncReply
-		ok := call(pb.currView.Backup, "PBServer.BackupSync", &args, &reply)
+		ok := call(nextView.Backup, "PBServer.BackupSync", &args, &reply)
 		if (ok && reply.Err == OK) {
 			pb.dbSyncFlag = true
 		}
