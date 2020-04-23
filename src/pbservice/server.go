@@ -95,9 +95,11 @@ func (pb *PBServer) ApplyPutAppend(args *PutAppendArgs, reply *PutAppendReply) e
 		pb.db[key] = val
 	} else if (txnType == "Append") {
 		pb.db[key] = entry + val
-	} else {
-		reply.Err = ErrBadRequest
 	}
+
+	//else {
+	//	reply.Err = ErrBadRequest
+	//}
 
 	// Value not in DB
 	pb.txnHistory[id] = TxnRecord{Key: key, Value: val, TxnType: txnType}

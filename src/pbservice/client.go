@@ -1,6 +1,9 @@
 package pbservice
 
-import "viewservice"
+import (
+	"time"
+	"viewservice"
+)
 import "net/rpc"
 import "fmt"
 
@@ -11,6 +14,7 @@ import "math/big"
 type Clerk struct {
 	vs *viewservice.Clerk
 	// Your declarations here
+	currView viewservice.View
 }
 
 // this may come in handy.
@@ -74,8 +78,23 @@ func call(srv string, rpcname string,
 func (ck *Clerk) Get(key string) string {
 
 	// Your code here.
+	args := &GetArgs{Key: key, ID: nrand()} // give a unique ID to this get operation
+	var reply GetReply
 
-	return "???"
+	ok := call(ck.currView.Primary, "PBServer.Get", args, &reply)
+
+	// if currView primary is not the actual primary, ping again
+	for !ok || reply.Err == ErrWrongServer {
+		time.Sleep(viewservice.PingInterval)
+		ck.currView, _ = ck.vs.Get()
+		ok = call(ck.currView.Primary, "PBServer.Get", args, &reply)
+	}
+
+	if reply.Err != ErrNoKey {
+		return reply.Value
+	} else {
+		return ""
+	}
 }
 
 //
@@ -84,6 +103,16 @@ func (ck *Clerk) Get(key string) string {
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 
 	// Your code here.
+	args := &PutAppendArgs{Key: key, Value: value, ID: nrand(), TxnType: op}  //  generate unique request ID to handle dup requests
+	var reply PutAppendReply
+
+	ok := call(ck.currView.Primary, "PBServer.PutAppend", args, &reply)
+
+	for !ok || reply.Err == ErrNoKey || reply.Err == ErrWrongServer {
+		time.Sleep(viewservice.PingInterval)
+		ck.currView, _ = ck.vs.Get()
+		ok = call(ck.currView.Primary, "PBServer.PutAppend", args, &reply)
+	}
 }
 
 //

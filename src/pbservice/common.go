@@ -4,7 +4,7 @@ const (
 	OK             = "OK"
 	ErrNoKey       = "ErrNoKey"
 	ErrWrongServer = "ErrWrongServer"
-	ErrBadRequest  = "ErrBadRequest"
+	// ErrBadRequest  = "ErrBadRequest"
 )
 
 type Err string
@@ -26,9 +26,9 @@ type PutAppendReply struct {
 }
 
 type GetArgs struct {
-	Key   string
+	Key string
 	// You'll have to add definitions here.
-	ID	  int64
+	ID      int64
 	TxnType string
 }
 
