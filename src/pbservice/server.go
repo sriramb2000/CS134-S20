@@ -12,7 +12,11 @@ import "os"
 import "syscall"
 import "math/rand"
 
-
+type TxnRecord struct {
+	key		   string
+	value	   string
+	txnType     string
+}
 
 type PBServer struct {
 	mu         sync.Mutex
@@ -24,13 +28,109 @@ type PBServer struct {
 	// Your declarations here.
 	currView   viewservice.View
 	db		   map[string]string
+	dbSyncFlag bool
+	txnHistory map[int64]TxnRecord
 }
 
+// Helpers
+
+func (pb *PBServer) IsPrimary() bool {
+	return currView.Primary == pb.me
+}
+
+func (pb *PBServer) IsBackup() bool {
+	return currView.Backup == pb.me
+}
+
+func (pb *PBServer) IsDuplicateGet(args *GetArgs) bool {
+	id, key, txnType := args.ID, args.Key, args.TxnType
+	record, ok := pb.txnHistory[id]
+
+	if (ok && record.key == key && record.txnType == txnType) {
+		return true
+	}
+
+	return false
+}
+
+func (pb *PBServer) IsDuplicatePutAppend(args *PutAppendArgs) bool {
+	id, key, val, txnType := args.ID, args.Key, args.Value, args.TxnType
+	record, ok := pb.txnHistory[id]
+
+	if (ok && record.key == key && record.txnType == txnType) {
+		return true
+	}
+
+	return false
+}
+
+func (pb *PBServer) ApplyGet(args *GetArgs, reply *GetReply) error {
+	id, key, txnType := args.ID, args.Key, args.TxnType
+	entry, ok := pb.db[key]
+
+	//TODO: Should probably handle Bad GETs (where TxnType != "Get")
+
+	if (ok) { // Value in DB
+		reply.Value = entry
+		reply.Err = OK
+	} else {
+		reply.Value = ""
+		reply.Err = ErrNoKey
+	}
+
+	// Value not in DB
+	// Key note: Value here is not being used to store the request arguments
+	// Instead it is being used to store the value that this particular get returned
+	pb.txnHistory[id] = TxnRecord{key: key, value: entry, txnType: txnType}
+	return nil
+}
+
+func (pb *PBServer) ApplyPutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
+	id, key, val, txnType := args.ID, args.Key, args.Value, args.TxnType
+	entry, ok := pb.db[key]
+
+	reply.Err = OK
+
+	if (txnType == "Put" || (txnType == "Append" && !ok)) { // If Put or Appending to new Key
+		pb.db[key] = val
+	} else if (txnType == "Append") {
+		pb.db[key] = entry + val
+	} else {
+		reply.Err = ErrBadRequest
+	}
+
+	// Value not in DB
+	pb.txnHistory[id] = TxnRecord{key: key, value: val, txnType: txnType}
+	return nil
+}
+
+// RPCs
 
 func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 
 	// Your code here.
+	pb.mu.Lock()
+	defer pb.mu.Unlock()
+	// Double Check that this Server is the Primary
+	if (!pb.IsPrimary()) {
+		reply.Err = ErrWrongServer
+		return nil
+	}
 
+	// Check if request is duplicate
+	if (pb.IsDuplicateGet(args)) {
+		record, _ = pb.txnHistory[args.ID]
+		reply.Value = record.value
+		reply.Err = OK
+		return nil
+	}
+
+	// Apply Get
+	pb.ApplyGet(args)
+
+	// TODO: Forward to Duplicate if possible
+	
+	// Return
 	return nil
 }
 
@@ -38,7 +138,27 @@ func (pb *PBServer) Get(args *GetArgs, reply *GetReply) error {
 func (pb *PBServer) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 
 	// Your code here.
+	pb.mu.Lock()
+	defer pb.mu.Unlock()
 
+	// Double Check that this Server is the Primary
+	if (!pb.IsPrimary()) {
+		reply.Err = ErrWrongServer
+		return nil
+	}
+
+	// Check if request is duplicate
+	if (pb.IsDuplicatePutAppend(args)) {
+		reply.Err = OK
+		return nil
+	}
+
+	// Apply PutAppend
+	pb.ApplyPutAppend(args)
+
+	// TODO: Forward to Duplicate if possible
+	
+	// Return
 
 	return nil
 }
@@ -62,14 +182,14 @@ func (pb *PBServer) tick() {
 		return 
 	}
 
-	dbSync := false
+	dbSyncFlag := false
 
 	// Determine whether or not we need to do a DB Sync
 	if (nextView.Primary == pb.me && nextView.Backup != "" && currView.Backup != nextView.Backup) {
-		dbSync = true
+		dbSyncFlag = true
 	}
 
-	if (dbSync) {
+	if (dbSyncFlag) {
 		// Do dbSync with new backup
 	}
 
@@ -108,6 +228,10 @@ func StartServer(vshost string, me string) *PBServer {
 	pb.me = me
 	pb.vs = viewservice.MakeClerk(me, vshost)
 	// Your pb.* initializations here.
+	pb.currView = viewservice.View{Viewnum: 0, Primary: "", Backup: ""}
+	pb.db = make(map[string]string)
+	pb.dbSyncFlag = false
+	pb.txnHistory = make(map[int64]TxnRecord)
 
 	rpcs := rpc.NewServer()
 	rpcs.Register(pb)
