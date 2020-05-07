@@ -31,17 +31,12 @@ import "sync/atomic"
 import "fmt"
 import "math/rand"
 
-
-// px.Status() return values, indicating
-// whether an agreement has been decided,
-// or Paxos has not yet reached agreement,
-// or it was agreed but forgotten (i.e. < Min()).
 type Fate int
 
 const (
 	Decided   Fate = iota + 1
-	Pending        // not yet decided.
-	Forgotten      // decided but forgotten.
+	Pending
+	Forgotten
 )
 
 type Paxos struct {
@@ -53,44 +48,171 @@ type Paxos struct {
 	peers      []string
 	me         int // index into peers[]
 
-
 	// Your data here.
+	InstanceSlots         map[int]*Instance  
+	DoneNumbersOfPaxosPeers []int
 }
 
-//
-// call() sends an RPC to the rpcname handler on server srv
-// with arguments args, waits for the reply, and leaves the
-// reply in reply. the reply argument should be a pointer
-// to a reply structure.
-//
-// the return value is true if the server responded, and false
-// if call() was not able to contact the server. in particular,
-// the replys contents are only valid if call() returned true.
-//
-// you should assume that call() will time out and return an
-// error after a while if it does not get a reply from the server.
-//
-// please use call() to send all RPCs, in client.go and server.go.
-// please do not change this function.
-//
-func call(srv string, name string, args interface{}, reply interface{}) bool {
-	c, err := rpc.Dial("unix", srv)
-	if err != nil {
-		err1 := err.(*net.OpError)
-		if err1.Err != syscall.ENOENT && err1.Err != syscall.ECONNREFUSED {
-			fmt.Printf("paxos Dial() failed: %v\n", err1)
+type AcceptorState struct {
+	PromiseNumber int
+	AcceptNumber int
+	AcceptValue interface{}
+}
+
+type Instance struct {
+	isDecided bool
+	AcceptorState *AcceptorState
+}
+
+// Prepare phase for Acceptor
+type PrepareArgs struct {
+	SequenceNum int
+	NewProposeNum int
+}
+
+type PrepareReply struct {
+	AcceptorState *AcceptorState
+	Error string
+}
+
+func (px *Paxos) PrepareHandler(args *PrepareArgs, reply *PrepareReply) error {
+	px.mu.Lock()
+	defer px.mu.Unlock()
+
+	sequenceNum, newProposeNum := args.SequenceNum, args.NewProposeNum
+	instance, ok := px.InstanceSlots[sequenceNum]
+
+	if ok {
+		acceptorState := instance.AcceptorState
+		if newProposeNum > acceptorState.PromiseNumber {
+			acceptorState.PromiseNumber = newProposeNum
+
+			reply.Error = "OK"
+			reply.AcceptorState = acceptorState
+		} else {
+			reply.Error = "Rejected"
 		}
-		return false
-	}
-	defer c.Close()
+	} else {
+		newAcceptorState := AcceptorState{PromiseNumber: newProposeNum, AcceptNumber:  -1, AcceptValue: nil}
+		px.InstanceSlots[sequenceNum] = &Instance{isDecided: false, AcceptorState: &newAcceptorState}
 
-	err = c.Call(name, args, reply)
-	if err == nil {
-		return true
+		reply.Error = "OK"
+		reply.AcceptorState = &newAcceptorState
+	}
+	return nil
+}
+
+// Accept phase for Acceptor
+type AcceptArgs struct {
+	SequenceNum    int
+	NewAcceptNum   int
+	NewAcceptValue interface{}
+}
+
+type AcceptReply struct {
+	Error       string
+}
+
+func (px *Paxos) AcceptHandler(args *AcceptArgs, reply *AcceptReply) error {
+	px.mu.Lock()
+	defer px.mu.Unlock()
+
+	sequenceNum, newAcceptNum, newAcceptValue := args.SequenceNum, args.NewAcceptNum, args.NewAcceptValue
+	instance, ok := px.InstanceSlots[sequenceNum]
+
+	if ok {
+		acceptorState := instance.AcceptorState
+
+		if newAcceptNum >= acceptorState.PromiseNumber {
+			acceptorState.PromiseNumber = newAcceptNum
+			acceptorState.AcceptNumber = newAcceptNum
+			acceptorState.AcceptValue = newAcceptValue
+
+			reply.Error = "OK"
+		} else {
+			reply.Error = "Rejected"
+		}
+	} else {
+		newAcceptorState := AcceptorState{PromiseNumber: newAcceptNum, AcceptNumber:  newAcceptNum, AcceptValue: newAcceptValue}
+		px.InstanceSlots[sequenceNum] = &Instance{isDecided: false, AcceptorState: &newAcceptorState}
+		reply.Error = "OK"
+	}
+	return nil
+}
+
+// Learn phase for Acceptor
+type LearnArgs struct {
+	SequenceNum       int
+	AcceptValue interface{}
+}
+
+type LearnReply struct {
+	Error string
+}
+
+func (px *Paxos) LearnHandler(args *LearnArgs, reply *LearnReply) error {
+	px.mu.Lock()
+	defer px.mu.Unlock()
+
+	sequenceNum, AcceptValue := args.SequenceNum, args.AcceptValue
+	instance, ok := px.InstanceSlots[sequenceNum]
+
+	if ok {
+		instance.AcceptorState.AcceptValue = AcceptValue
+		instance.isDecided = true
+	} else {
+		newAcceptorState := AcceptorState{PromiseNumber: -1, AcceptNumber:  -1, AcceptValue: AcceptValue}
+		px.InstanceSlots[sequenceNum] = &Instance{isDecided: true, AcceptorState: &newAcceptorState}
 	}
 
-	fmt.Println(err)
-	return false
+	reply.Error = "OK"
+	return nil
+}
+
+// Done phase for Acceptor
+type DoneArgs struct {
+	SequenceNum    int
+	PeerIndex int
+}
+
+type DoneReply struct {
+	Error string
+}
+
+func (px *Paxos) DoneHandler(args *DoneArgs, reply *DoneReply) error {
+	px.mu.Lock()
+	defer px.mu.Unlock()
+
+	sequenceNum, peerIndex := args.SequenceNum, args.PeerIndex
+	if sequenceNum > px.DoneNumbersOfPaxosPeers[peerIndex] {
+		px.DoneNumbersOfPaxosPeers[peerIndex] = sequenceNum
+		minSequenceNumberToForget := px.Min()
+		for sequenceNumber, instance := range px.InstanceSlots {
+			if sequenceNumber < minSequenceNumberToForget && instance.isDecided {
+				delete(px.InstanceSlots, sequenceNumber)
+			}
+		}
+	}
+
+	reply.Error = "OK"
+	return nil
+}
+
+func (px *Paxos) Done(seq int) {
+	if seq > px.DoneNumbersOfPaxosPeers[px.me] {
+		for i, peer := range px.peers {
+			args := DoneArgs{seq, px.me}
+			var reply DoneReply
+			if i == px.me {
+				px.DoneHandler(&args, &reply)
+			} else {
+				ok := call(peer, "Paxos.DoneHandler", &args, &reply)
+				if !ok {
+					reply.Error = "NetworkError"
+				}
+			}
+		}
+	}
 }
 
 
@@ -102,17 +224,97 @@ func call(srv string, name string, args interface{}, reply interface{}) bool {
 // is reached.
 //
 func (px *Paxos) Start(seq int, v interface{}) {
-	// Your code here.
-}
+	go func(sequenceNum int, value interface{}) {
+		px.mu.Lock()
+		instance, ok := px.InstanceSlots[sequenceNum]
+		if ok && instance.isDecided {
+			return
+		} else if !ok {
+			newAcceptorState := AcceptorState{PromiseNumber: -1, AcceptNumber:  -1, AcceptValue:   nil}
+			px.InstanceSlots[sequenceNum] = &Instance{isDecided: false, AcceptorState: &newAcceptorState}
+		}
+		px.mu.Unlock()
 
-//
-// the application on this machine is done with
-// all instances <= seq.
-//
-// see the comments for Min() for more explanation.
-//
-func (px *Paxos) Done(seq int) {
-	// Your code here.
+		isDecided, _ := px.Status(sequenceNum)
+		for proposalNum := -1; !px.isdead() && isDecided != Decided && sequenceNum >= px.Min(); isDecided, _ = px.Status(sequenceNum) {
+			proposalNum = px.GetProposalNum(proposalNum)
+			
+			// Prepare phase
+			var highestNProposed int = -1
+			promiseValue := value
+			prepareVote := 0
+			for i, peer := range px.peers {
+				args := PrepareArgs{sequenceNum, proposalNum}
+				var reply PrepareReply
+
+				if i == px.me {
+					px.PrepareHandler(&args, &reply)
+				} else {
+					ok := call(peer, "Paxos.PrepareHandler", &args, &reply)
+					// deal with network errors
+					if !ok {
+						reply.Error = "NetworkError"
+					}
+				}
+
+				// Keep count of vote
+				if reply.Error == "OK" {
+					prepareVote++
+					if reply.AcceptorState.AcceptNumber > highestNProposed {
+						highestNProposed = reply.AcceptorState.AcceptNumber
+						promiseValue = reply.AcceptorState.AcceptValue
+					}
+				}
+			}
+
+			// didn't get majority vote
+			if prepareVote <= len(px.peers) / 2 {
+				continue
+			}
+
+			// Accept Phase
+			acceptVote := 0
+			for i, peer := range px.peers {
+				args := AcceptArgs{sequenceNum, proposalNum, promiseValue}
+				var reply AcceptReply
+				if i == px.me {
+					px.AcceptHandler(&args, &reply)
+				} else {
+					ok := call(peer, "Paxos.AcceptHandler", &args, &reply)
+					// deal with network errors
+					if !ok {
+						reply.Error = "NetworkError"
+					}
+				}
+
+				// Keep count of vote
+				if reply.Error == "OK" {
+					acceptVote++
+				}
+			}
+
+			// didn't get majority vote
+			if acceptVote <= len(px.peers) / 2 {
+				if highestNProposed > proposalNum {
+					proposalNum = highestNProposed
+				}
+				continue
+			}
+			
+			for i, peer := range px.peers {
+				args := LearnArgs{sequenceNum, promiseValue}
+				var reply LearnReply
+				if i == px.me {
+					px.LearnHandler(&args, &reply)
+				} else {
+					ok := call(peer, "Paxos.LearnHandler", &args, &reply)
+					if !ok {
+						reply.Error = "NetworkError"
+					}
+				}
+			}
+		}
+	}(seq, v)
 }
 
 //
@@ -121,8 +323,13 @@ func (px *Paxos) Done(seq int) {
 // this peer.
 //
 func (px *Paxos) Max() int {
-	// Your code here.
-	return 0
+	max := -1
+	for sequenceNum, _ := range px.InstanceSlots {
+		if sequenceNum > max {
+			max = sequenceNum
+		}
+	}
+	return max
 }
 
 //
@@ -150,13 +357,19 @@ func (px *Paxos) Max() int {
 // even if all reachable peers call Done. The reason for
 // this is that when the unreachable peer comes back to
 // life, it will need to catch up on instances that it
-// missed -- the other peers therefor cannot forget these
+// missed -- the other peers therefore cannot forget these
 // instances.
 //
 func (px *Paxos) Min() int {
-	// You code here.
-	return 0
+	min := -1
+	for _, ele := range px.DoneNumbersOfPaxosPeers {
+		if min == -1 || ele < min {
+			min = ele
+		}
+	}
+	return min + 1
 }
+
 
 //
 // the application wants to know whether this
@@ -166,8 +379,19 @@ func (px *Paxos) Min() int {
 // it should not contact other Paxos peers.
 //
 func (px *Paxos) Status(seq int) (Fate, interface{}) {
-	// Your code here.
-	return Pending, nil
+	px.mu.Lock()
+	defer px.mu.Unlock()
+
+	if seq < px.Min() {
+		return Forgotten, nil
+	}
+
+	instance, ok := px.InstanceSlots[seq]
+	if ok && instance.isDecided {
+		return Decided, instance.AcceptorState.AcceptValue
+	} else {
+		return Pending, nil
+	}
 }
 
 
@@ -216,6 +440,11 @@ func Make(peers []string, me int, rpcs *rpc.Server) *Paxos {
 
 
 	// Your initialization code here.
+	px.InstanceSlots = make(map[int]*Instance)
+	px.DoneNumbersOfPaxosPeers = make([]int, len(peers))
+	for i, _ := range px.DoneNumbersOfPaxosPeers {
+		px.DoneNumbersOfPaxosPeers[i] = -1
+	}
 
 	if rpcs != nil {
 		// caller will create socket &c
@@ -270,4 +499,47 @@ func Make(peers []string, me int, rpcs *rpc.Server) *Paxos {
 
 
 	return px
+}
+
+//
+// call() sends an RPC to the rpcname handler on server srv
+// with arguments args, waits for the reply, and leaves the
+// reply in reply. the reply argument should be a pointer
+// to a reply structure.
+//
+// the return value is true if the server responded, and false
+// if call() was not able to contact the server. in particular,
+// the replys contents are only valid if call() returned true.
+//
+// you should assume that call() will time out and return an
+// error after a while if it does not get a reply from the server.
+//
+// please use call() to send all RPCs, in client.go and server.go.
+// please do not change this function.
+//
+func call(srv string, name string, args interface{}, reply interface{}) bool {
+	c, err := rpc.Dial("unix", srv)
+	if err != nil {
+		err1 := err.(*net.OpError)
+		if err1.Err != syscall.ENOENT && err1.Err != syscall.ECONNREFUSED {
+			fmt.Printf("paxos Dial() failed: %v\n", err1)
+		}
+		return false
+	}
+	defer c.Close()
+
+	err = c.Call(name, args, reply)
+	if err == nil {
+		return true
+	}
+
+	fmt.Println(err)
+	return false
+}
+
+func (px *Paxos) GetProposalNum(value int) int {
+	proposalNum := value + 1
+	for ;proposalNum % len(px.peers) != px.me; proposalNum++ {
+	}
+	return proposalNum
 }
