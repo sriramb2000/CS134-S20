@@ -97,7 +97,7 @@ func (kv* KVPaxos) PassOp(proposalOp Op) error {
 // Clears request from Cache
 func (kv* KVPaxos) ForgetOp(opId int64) {
 	if opId != -1 {
-		_, ok = kv.opHistory[opId]
+		_, ok := kv.opHistory[opId]
 		if ok {
 			delete(kv.opHistory, opId)
 		}
@@ -105,7 +105,7 @@ func (kv* KVPaxos) ForgetOp(opId int64) {
 }
 
 // Actually Executes the Request, and caches the response
-func (kv* KVPaxos) CommitOp(operation op) {
+func (kv* KVPaxos) CommitOp(operation Op) {
 	key, val, txnType, id := operation.Key, operation.Value, operation.TxnType, operation.Id
 	curVal, ok := kv.db[key]
 	var res string
@@ -162,7 +162,7 @@ func (kv* KVPaxos) FormatGetReply(id int64, reply *GetReply) {
 // in the `PassOp` phase
 func (kv* KVPaxos) FormatPutAppendReply(id int64, reply *PutAppendReply) {
 	val := kv.opHistory[id]
-	reply.Value = val
+	reply.Err = val
 }
 
 func (kv *KVPaxos) Get(args *GetArgs, reply *GetReply) error {
@@ -174,10 +174,10 @@ func (kv *KVPaxos) Get(args *GetArgs, reply *GetReply) error {
 		kv.FormatGetReply(args.Id, reply)
 		return nil
 	}
-	proposalOp = Op{Key: args.Key, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId} //TODO: May need to add Value prop here
+	proposalOp := Op{Key: args.Key, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId} //TODO: May need to add Value prop here
 	kv.PassOp(proposalOp)
 
-	kv.FormatPutAppendReply(args.Id, reply)
+	kv.FormatGetReply(args.Id, reply)
 	return nil
 }
 
@@ -190,7 +190,7 @@ func (kv *KVPaxos) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 		kv.FormatPutAppendReply(args.Id, reply) // Will always be OK
 		return nil
 	}
-	proposalOp = Op{Key: args.Key, Value: args.Value, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId}
+	proposalOp := Op{Key: args.Key, Value: args.Value, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId}
 	kv.PassOp(proposalOp)
 	
 	kv.FormatPutAppendReply(args.Id, reply)
