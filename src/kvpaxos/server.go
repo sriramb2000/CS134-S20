@@ -27,6 +27,11 @@ type Op struct {
 	// Your definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
+	Key		   string
+	Value	   string
+	TxnType     string
+	Id         int64 // ID of current op
+	DoneId     int64 // ID of previous client op (so it can be cleaned from opHistory)
 }
 
 type KVPaxos struct {
@@ -38,17 +43,156 @@ type KVPaxos struct {
 	px         *paxos.Paxos
 
 	// Your definitions here.
+	currSeqNum int 
+	db         map[string]string
+	opHistory  map[int64]string
 }
 
+// Helpers
+
+// Runs Paxos until some Consensus Op is reached for the given sequence numebr
+func (kv* KVPaxos) Consensify(seq int, val Op) Op {
+	kv.px.Start(seq, val)
+
+	to := 10 * time.Millisecond
+	for {
+		status, value := kv.px.Status(seq)
+		if status == paxos.Decided{
+			return value.(Op) // cast to Op
+		}
+		time.Sleep(to)
+		if to < 10 * time.Second {
+			to *= 2
+		}
+	}
+}
+
+// Pass a Proposal ;D
+func (kv* KVPaxos) PassOp(proposalOp Op) error {
+	for {
+		seqNum := kv.currSeqNum
+		kv.currSeqNum++
+
+		status, res := kv.px.Status(seqNum)
+
+		var acceptedOp Op
+		if status == paxos.Decided { // If this instance has already been decided, proceed with decided value
+			acceptedOp = res.(Op)
+		} else { // Otherwise propose our own Op
+			acceptedOp = kv.Consensify(seqNum, proposalOp)
+		}
+
+		kv.CommitOp(acceptedOp)
+		kv.ForgetOp(acceptedOp.DoneId)
+		kv.px.Done(seqNum) // This Paxos Peer can safely forget about this instance now that the value has been committed
+
+		if proposalOp.Id == acceptedOp.Id { // We can respond to client
+			break
+		}
+	}
+	return nil
+}
+
+// Clears request from Cache
+func (kv* KVPaxos) ForgetOp(opId int64) {
+	if opId != -1 {
+		_, ok = kv.opHistory[opId]
+		if ok {
+			delete(kv.opHistory, opId)
+		}
+	}
+}
+
+// Actually Executes the Request, and caches the response
+func (kv* KVPaxos) CommitOp(operation op) {
+	key, val, txnType, id := operation.Key, operation.Value, operation.TxnType, operation.Id
+	curVal, ok := kv.db[key]
+	var res string
+	if txnType == "Get" {
+		if ok {
+			res = curVal
+		} else {
+			res = ErrNoKey
+		}
+	} else if txnType == "Put" {
+		kv.db[key] = val
+		res = OK
+	} else if txnType == "Append" {
+		if ok {
+			kv.db[key] = curVal + val
+		} else {
+			kv.db[key] = val
+		}
+		res = OK
+	}
+	kv.opHistory[id] = res
+}
+
+// Assumes that another request with the same ID will not arrive before this request is cleared from history
+func (kv *KVPaxos) IsDuplicateGet(args *GetArgs) bool {
+	id := args.Id
+	_, ok := kv.opHistory[id]
+
+	return ok 
+}
+
+// Assumes that another request with the same ID will not arrive before this request is cleared from history
+func (kv* KVPaxos) IsDuplicatePutAppend(args *PutAppendArgs) bool {
+	id := args.Id
+	res, ok := kv.opHistory[id]
+
+	return ok && res == OK
+}
+
+// Will format reply appropriately given the Request ID - Assumes that the correct response has already been cached
+// in the `PassOp` phase
+func (kv* KVPaxos) FormatGetReply(id int64, reply *GetReply) {
+	val := kv.opHistory[id]
+	if val == ErrNoKey {
+		reply.Value = ""
+		reply.Err = ErrNoKey
+	} else {
+		reply.Value = val
+		reply.Err = OK
+	}
+}
+
+// Will format reply appropriately given the Request ID - Assumes that the correct response has already been cached
+// in the `PassOp` phase
+func (kv* KVPaxos) FormatPutAppendReply(id int64, reply *PutAppendReply) {
+	val := kv.opHistory[id]
+	reply.Value = val
+}
 
 func (kv *KVPaxos) Get(args *GetArgs, reply *GetReply) error {
 	// Your code here.
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
+
+	if kv.IsDuplicateGet(args) {
+		kv.FormatGetReply(args.Id, reply)
+		return nil
+	}
+	proposalOp = Op{Key: args.Key, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId} //TODO: May need to add Value prop here
+	kv.PassOp(proposalOp)
+
+	kv.FormatPutAppendReply(args.Id, reply)
 	return nil
 }
 
 func (kv *KVPaxos) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 	// Your code here.
+	kv.mu.Lock()
+	defer kv.mu.Unlock()
 
+	if kv.IsDuplicatePutAppend(args) {
+		kv.FormatPutAppendReply(args.Id, reply) // Will always be OK
+		return nil
+	}
+	proposalOp = Op{Key: args.Key, Value: args.Value, TxnType: args.Op, Id: args.Id, DoneId: args.DoneId}
+	kv.PassOp(proposalOp)
+	
+	kv.FormatPutAppendReply(args.Id, reply)
 	return nil
 }
 
@@ -94,6 +238,9 @@ func StartServer(servers []string, me int) *KVPaxos {
 	kv.me = me
 
 	// Your initialization code here.
+	kv.db = make(map[string]string)
+	kv.opHistory = make(map[int64]string)
+	kv.currSeqNum = 0
 
 	rpcs := rpc.NewServer()
 	rpcs.Register(kv)
