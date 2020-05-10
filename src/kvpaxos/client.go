@@ -3,6 +3,7 @@ package kvpaxos
 import "net/rpc"
 import "crypto/rand"
 import "math/big"
+import "time"
 
 import "fmt"
 
