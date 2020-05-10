@@ -318,17 +318,12 @@ func DPrintf(format string, a ...interface{}) (n int, err error) {
 	return
 }
 
-
 type Op struct {
-	// Your definitions here.
-	Key       string
-	Value     string
+	ID int64
 	Operation string
-	CurrId    int64   //  Processing the current client request
-	PrevId    int64   //  Cleaning up client requests previously served
-
-	// Field names must start with capital letters,
-	// otherwise RPC will break.
+	Key string
+	Value string
+	Destination string
 }
 
 type KVPaxos struct {
@@ -338,216 +333,149 @@ type KVPaxos struct {
 	dead       int32 // for testing
 	unreliable int32 // for testing
 	px         *paxos.Paxos
-
+	peers      []string
 	// Your definitions here.
-	currSeq      int                //  keeps track of current sequence instance
-	database     map[string]string  //  keeps track of the k/v database
-	prevRequests map[int64]string   //  keeps track of requests sent by the client
+	key_val_store map[string]string
+	logCounter int
+	duplicateRequests map[int64]*GetReply
 }
 
+func (kv *KVPaxos) InterpretLog(seq int) {
+	for i := kv.logCounter; i <= seq; i+=1{
+		status, val := kv.px.Status(i)
+		if status == paxos.Decided{
+	        op := val.(Op)
+	        //DPrintf("KVPaxos.InterpretLog(%v): Interpeted Log for op_id: %v and i: %d\n", kv.me, op.ID, i)
+	        // Check for duplicate requests
+	        _, duplicate := kv.duplicateRequests[op.ID]
+	        if duplicate == true {
+	        	continue
+	        }
+	        //DPrintf("KVPaxos.InterpretLog(%v): Not Duplicate Interpeted Log for op_id: %v and i: %d\n", kv.me, op.ID, i)
+	        if op.Operation == "Get" {
+	        	getValue, ok := kv.key_val_store[op.Key]
+						if op.Destination == kv.peers[kv.me] {
+							kv.duplicateRequests[op.ID] = &GetReply{"", getValue}
+						}
+	        	if ok == true {
+	        		//kv.duplicateRequests[op.ID] = &GetReply{"", getValue}
+	        		//DPrintf("Get %d request key: %s value: %s", kv.me, op.Key, getValue)
+							//DPrintf("KVPaxos.InterpretLog(%v): Get request key: %v, value: %v\n", kv.me, op.Key, getValue)
+	        	} else {
+	        		kv.duplicateRequests[op.ID] = &GetReply{ErrNoKey, ""}
+	        		//DPrintf("KVPaxos.InterpretLog(%v): Get request key: %v Not Found\n", kv.me, op.Key)
+	        	}
 
-//
-// Run Paxos on this instance until we have gained consensus
-//
-func RunPaxos(kv *KVPaxos, seq int, v Op) Op {
-	kv.px.Start(seq, v)
-
-	to := 10 * time.Millisecond
-	for {
-		operationStatus, operationValue := kv.px.Status(seq)
-		if operationStatus == paxos.Decided {
-			return operationValue.(Op)
-		}
-
-		time.Sleep(to)
-		if to < 10 * time.Second {
-			to *= 2
-		}
+	        } else if op.Operation == "Put"{
+	        	kv.key_val_store[op.Key] = op.Value
+						kv.duplicateRequests[op.ID] = &GetReply{"", kv.key_val_store[op.Key]}
+	        	//DPrintf("Put %d request key: %s value: %s map: %+v\n", kv.me, op.Key, op.Value, kv.key_val_store)
+						//DPrintf("KVPaxos.InterpretLog(%v): Put request key: %v, value: %v, map: %+v\n", kv.me, op.Key, kv.key_val_store[op.Key], kv.key_val_store)
+	        } else if op.Operation == "Append"{
+	        	original_value, ok := kv.key_val_store[op.Key]
+	        	if ok == false {
+	        		original_value = ""
+	        	}
+	        	new_value := original_value + op.Value
+	        	kv.key_val_store[op.Key] = new_value
+						kv.duplicateRequests[op.ID] = &GetReply{"", kv.key_val_store[op.Key]}
+	        	//DPrintf("Append %d request key: %s value: %s map: %+v\n", kv.me, op.Key, new_value, kv.key_val_store)
+						//DPrintf("KVPaxos.InterpretLog(%v): Append request key: %v, value: %v, map: %+v\n", kv.me, op.Key, kv.key_val_store[op.Key], kv.key_val_store)
+	        }
+	    }
 	}
 }
 
 
-//
-// Clean up client requests that have previously been served
-//
-func FreePrevRequest(kv *KVPaxos, prevId int64) {
-	if prevId != -1 {
-		_, ok := kv.prevRequests[prevId]
-		if ok {
-			delete(kv.prevRequests, prevId)
-		}
-	}
-}
-
-
-//
-// The Paxos replicas have agreed on the order to apply this client request, so update the k/v database
-//
-func ApplyOperation(kv *KVPaxos, operationResult Op) {
-	key, value, currId, operation := operationResult.Key, operationResult.Value, operationResult.CurrId, operationResult.Operation
-	prev, ok := kv.database[key]
-	//  Apply GET
-	if operation == "Get" {
-		if ok {
-			kv.prevRequests[currId] = prev
-		} else {
-			kv.prevRequests[currId] = ErrNoKey
-		}
-	//  Apply PUT
-	} else if operation == "Put" {
-		kv.database[key] = value
-		kv.prevRequests[currId] = OK
-	//  Apply APPEND
-	} else if operation == "Append" {
-		kv.database[key] = prev + value
-		kv.prevRequests[currId] = OK
-	}
-}
-
-
-//
-// Checks to see if this is a duplicate GET request to ensure at-most-once semantics
-//
-func IsDupGet(kv *KVPaxos, args *GetArgs) bool {
-	key, currId := args.Key, args.CurrId
-	prev, ok := kv.prevRequests[currId]
-
-	//  Duplicate RPC request
-	if ok && prev == key {
-		return true
-	}
-
-	return false
-}
-
-
-//
-// GET request handler
-//
 func (kv *KVPaxos) Get(args *GetArgs, reply *GetReply) error {
-	// Your code here.
+	//DPrintf("KVPaxos.Get(%v): Received Get request: %+v\n", kv.me, args)
+	op := Op{args.ID, "Get", args.Key, "", kv.peers[kv.me]}
 	kv.mu.Lock()
-	defer kv.mu.Unlock()
-
-	//  Check if we have seen this request before, and if so, return stored value
-	if IsDupGet(kv, args) {
-		reply.Value = kv.database[args.Key]
-		reply.Err = OK
+	//DPrintf("KVPaxos.Get(%v): Lock acquired for Get request ID: %v\n", kv.me, args.ID)
+	_, duplicateFound := kv.duplicateRequests[op.ID]
+	if duplicateFound == true {
+		//DPrintf("KVPaxos.Get(%v): Duplicate detected for Get request ID: %v\n", kv.me, args.ID)
+		//DPrintf("KVPaxos.Get(%v): Value stored: %v\n", kv.me, kv.key_val_store[args.Key])
+		reply.Value = kv.key_val_store[args.Key]
+		reply.Err = ""
+		kv.mu.Unlock()
 		return nil
 	}
-
-	//  Try to assign the next available Paxos instance (sequence number) to each incoming client RPC
-	for {
-		//  Prepare Paxos value
-		operation := Op{Key: args.Key, Value: "", Operation: "Get", CurrId: args.CurrId, PrevId: args.PrevId}
-		currSeq := kv.currSeq
-		kv.currSeq++
-
-		//  Gain consensus on this Paxos instance
-		var operationResult Op
-		operationStatus, operationValue := kv.px.Status(currSeq)
-		//  We are decided on this instance
-		if operationStatus == paxos.Decided {
-			operationResult = operationValue.(Op)
-		//  We aren't decided on this instance, run Paxos until we are
-		} else {
-			operationResult = RunPaxos(kv, currSeq, operation)
-		}
-
-		//  Clean up client requests that have previously been served
-		FreePrevRequest(kv, args.PrevId)
-		//  We have agreed on this instance, so update database, and remember the request we served
-		ApplyOperation(kv, operationResult)
-		//  We are done processing this instance and will no longer need it or any previous instance
-		kv.px.Done(currSeq)
-
-		//  Paxos elected the current operation, so return GET result, done
-		if operationResult.CurrId == args.CurrId {
-			val := kv.prevRequests[args.CurrId]
-			if val == ErrNoKey {
-				reply.Value = ""
-				reply.Err = ErrNoKey
-			} else {
-				reply.Value = kv.prevRequests[args.CurrId]
-				reply.Err = OK
-			}
-
-			break
-		}
-	}
-
+	seq := kv.RunPaxos(op)
+	//DPrintf("KVPaxos.Get(%v): Ran Paxos for ID: %v and got back seq: %v\n", kv.me, args.ID, seq)
+	kv.InterpretLog(seq)
+	//DPrintf("KVPaxos.Get(%v): Ran InterpretLog for ID: %v for seq: %v\n", kv.me, args.ID, seq)
+	kv.px.Done(seq)
+	//DPrintf("KVPaxos.Get(%v): Ran Done for ID: %v for seq: %v\n", kv.me, args.ID, seq)
+	kv.logCounter = seq + 1
+	value := kv.duplicateRequests[op.ID]
+	//DPrintf("KVPaxos.Get(%v): Succesful Get Request for ID: %v and err: %v\n", kv.me, args.ID, value.Err)
+	//DPrintf("KVPaxos.Get(%v): Completed Get Request for ID: %v with key: %v, value: %v\n", kv.me, args.ID, args.Key, value.Value)
+	//DPrintf("KVPaxos.Get(%v): key_val_store[%v]: %v\n", kv.me, op.Key, kv.key_val_store[op.Key])
+	reply.Value = value.Value
+	//DPrintf("KVPaxos.Get(%v): Get reply.Value for ID: %v with key: %v, value: %v\n", kv.me, args.ID, args.Key, reply.Value)
+	reply.Err = value.Err
+	kv.duplicateRequests[op.ID] = &GetReply{}
+	kv.mu.Unlock()
 	return nil
 }
 
-
-//
-// Checks to see if this is a duplicate PUT/APPEND request to ensure at-most-once semantics
-//
-func IsDupPutAppend(kv *KVPaxos, args *PutAppendArgs) bool {
-	_, ok := kv.prevRequests[args.CurrId]
-
-	//  Duplicate RPC request
-	if ok {
-		return true
-	}
-
-	return false
-}
-
-
-//
-// PUT/APPEND request handler
-//
 func (kv *KVPaxos) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
-	// Your code here.
+	//DPrintf("KVPaxos.PutAppend(%v): Received PutAppend request: %+v\n", kv.me, args)
+	op := Op{args.ID, args.Op, args.Key, args.Value, kv.peers[kv.me]}
 	kv.mu.Lock()
-	defer kv.mu.Unlock()
-
-	//  Check if we have seen this request before
-	if IsDupPutAppend(kv, args) {
-		reply.Err = OK
+	_, duplicateFound := kv.duplicateRequests[op.ID]
+	if duplicateFound == true {
+		kv.mu.Unlock()
 		return nil
 	}
-
-	//  Try to assign the next available Paxos instance (sequence number) to each incoming client RPC
-	for {
-		//  Prepare Paxos value
-		operation := Op{Key: args.Key, Value: args.Value, Operation: args.Op, CurrId: args.CurrId, PrevId: args.PrevId}
-		currSeq := kv.currSeq
-		kv.currSeq++
-
-		//  Gain consensus on this Paxos instance
-		var operationResult Op
-		operationStatus, operationValue := kv.px.Status(currSeq)
-		//  We are decided on this instance
-		if operationStatus == paxos.Decided {
-			operationResult = operationValue.(Op)
-		//  We aren't decided on this instance, run Paxos until we are
-		} else {
-			operationResult = RunPaxos(kv, currSeq, operation)
-		}
-
-		//  Clean up client requests that have previously been served
-		FreePrevRequest(kv, args.PrevId)
-		//  We have agreed on this instance, so update database, and remember the request we served
-		ApplyOperation(kv, operationResult)
-		//  We are done processing this instance and will no longer need it or any previous instance
-		kv.px.Done(currSeq)
-
-		//  Paxos elected the current operation, so done
-		if operationResult.CurrId == args.CurrId {
-			break
-		}
-	}
-
-	reply.Err = OK
+	seq := kv.RunPaxos(op)
+	//DPrintf("KVPaxos.PutAppend(%v): Ran Paxos and got back seq: %v\n", kv.me, seq)
+	kv.InterpretLog(seq)
+	kv.px.Done(seq)
+	kv.logCounter = seq + 1
+	//value := kv.duplicateRequests[op.ID]
+	//DPrintf("KVPaxos.PutAppend(%v): Succesful Put/Append Request for ID: %v and err: %v\n", kv.me, args.ID, value.Err)
+	//DPrintf("KVPaxos.PutAppend(%v): Completed Put/Append Request for ID: %v with key: %v, value: %v\n", kv.me, args.ID, args.Key, value.Value)
+	reply.Err = ""
+	kv.duplicateRequests[op.ID] = &GetReply{}
+	kv.mu.Unlock()
 	return nil
+}
+
+func (kv *KVPaxos) RunPaxos (op Op) int {
+	seq := kv.logCounter
+	for {
+		kv.px.Start(seq, op)
+		//DPrintf("Called %d runPaxos with seq: %d and Op: %v and map: %+v\n", kv.me, seq, op.ID, kv.key_val_store)
+		//DPrintf("KVPaxos.RunPaxos(%v): Called runPaxos with seq: %d and Op ID: %v:\n", kv.me, seq, op.ID)
+		to := 10 * time.Millisecond
+	    for {
+	        status, val := kv.px.Status(seq)
+	        if status == paxos.Decided{
+	        	value := val.(Op)
+	        	//DPrintf("KVPaxos.RunPaxos(%v): Paxos ID Decided: %v with seq number: %d\n", kv.me, value.ID, seq)
+	        	// Compare values to see if original request was accepted
+	        	if value == op {
+	        		return seq
+	        	}
+	        	break
+	        }
+	        time.Sleep(to)
+	        if to < 10 * time.Second {
+	            to *= 2
+	        }
+	    }
+	    seq += 1
+	}
+	// Should never return this value
+	return -1
 }
 
 // tell the server to shut itself down.
 // please do not change these two functions.
 func (kv *KVPaxos) kill() {
-	DPrintf("Kill(%d): die\n", kv.me)
+	//DPrintf("Kill(%d): die\n", kv.me)
 	atomic.StoreInt32(&kv.dead, 1)
 	kv.l.Close()
 	kv.px.Kill()
@@ -584,11 +512,14 @@ func StartServer(servers []string, me int) *KVPaxos {
 
 	kv := new(KVPaxos)
 	kv.me = me
+	kv.peers = servers
 
 	// Your initialization code here.
-	kv.currSeq = 0
-	kv.database = make(map[string]string)
-	kv.prevRequests = make(map[int64]string)
+	kv.key_val_store = make(map[string]string)
+	kv.logCounter = 0
+	kv.duplicateRequests = make(map[int64]*GetReply)
+
+	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
 
 	rpcs := rpc.NewServer()
 	rpcs.Register(kv)
@@ -634,6 +565,5 @@ func StartServer(servers []string, me int) *KVPaxos {
 			}
 		}
 	}()
-
 	return kv
 }

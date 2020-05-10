@@ -121,14 +121,14 @@ package kvpaxos
 import "net/rpc"
 import "crypto/rand"
 import "math/big"
-
-import "fmt"
 import "time"
+import "fmt"
+import "log"
 
 type Clerk struct {
 	servers []string
 	// You will have to modify this struct.
-	prevId  int64  //  Piggybacking client requests already served by the server to provide at-most-once semantics
+	currServer int
 }
 
 func nrand() int64 {
@@ -142,7 +142,7 @@ func MakeClerk(servers []string) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	// You'll have to add code here.
-	ck.prevId = -1
+	log.SetFlags(log.Ldate | log.Ltime | log.Lmicroseconds)
 	return ck
 }
 
@@ -186,55 +186,49 @@ func call(srv string, rpcname string,
 // keeps trying forever in the face of all other errors.
 //
 func (ck *Clerk) Get(key string) string {
-	// You will have to modify this function.
-
-	//  Prepare the arguments
-	currId := nrand()
-	args := &GetArgs{Key: key, CurrId: currId, PrevId: ck.prevId}  //  generate unique request ID to handle dup requests
-	var reply GetReply
-
-	//  Send an RPC request, wait for the reply
-	ok := false
-	for !ok {
-		//  Keep retrying until we get an answer
+	args := GetArgs{key, nrand()}
+	for {
 		for _, server := range ck.servers {
-			ok = call(server, "KVPaxos.Get", args, &reply)
-			if !ok {
-				time.Sleep(RetryInterval)
+			reply := GetReply{}
+			ok := call(server, "KVPaxos.Get", &args, &reply)
+			if ok == true {
+				DPrintf("KVPaxos.Clerk.Get(): ID: %v, Made request for key: %v to server: %v\n", args.ID, key, server)
+				if reply.Err == "" {
+					if reply.Value == "" {
+						DPrintf("KVPaxos.Clerk.Get(): ID: %v, Requested key: %v, got back empty string from server: %v\n", args.ID, key, server)
+					}
+
+					if reply.Value != "" {
+						DPrintf("KVPaxos.Clerk.Get(): ID: %v, Requested key: %v, got back string (%v) from server: %v\n", args.ID, key, reply.Value, server)
+					}
+					return reply.Value
+				}
+				if reply.Err == ErrNoKey {
+					DPrintf("KVPaxos.Clerk.Get(): Server did not find value for key: %v\n", key)
+					return ""
+				}
 			}
 		}
+		time.Sleep(50 * time.Millisecond)
 	}
-
-	//  Piggyback the ID of the request just served on the next request (to tell the server it has heard a reply for this RPC)
-	ck.prevId = currId
-	return reply.Value
+	return ""
 }
 
 //
 // shared by Put and Append.
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
-	// You will have to modify this function.
-
-	//  Prepare the arguments
-	currId := nrand()
-	args := &PutAppendArgs{Key: key, Value: value, Op: op, CurrId: currId, PrevId: ck.prevId}  //  generate unique request ID to handle dup requests
-	var reply PutAppendReply
-
-	//  Send an RPC request, wait for the reply
-	ok := false
-	for !ok {
-		//  Keep retrying until we get an answer
+	args := PutAppendArgs{key, value, op, nrand()}
+	for {
 		for _, server := range ck.servers {
-			ok = call(server, "KVPaxos.PutAppend", args, &reply)
-			if !ok {
-				time.Sleep(RetryInterval)
+			reply := PutAppendReply{}
+			ok := call(server, "KVPaxos.PutAppend", &args, &reply)
+			if ok == true {
+				return
 			}
 		}
+		time.Sleep(50 * time.Millisecond)
 	}
-
-	//  Piggyback the ID of the request just served on the next request (to tell the server it has heard a reply for this RPC)
-	ck.prevId = currId
 }
 
 func (ck *Clerk) Put(key string, value string) {
