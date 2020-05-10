@@ -58,7 +58,7 @@ func (kv* KVPaxos) Consensify(seq int, val Op) Op {
 	to := 10 * time.Millisecond
 	for {
 		status, value := kv.px.Status(seq)
-		if status == paxos.Decided{
+		if status == paxos.Decided {
 			return value.(Op) // cast to Op
 		}
 		time.Sleep(to)
@@ -161,8 +161,11 @@ func (kv* KVPaxos) FormatGetReply(id int64, reply *GetReply) {
 // Will format reply appropriately given the Request ID - Assumes that the correct response has already been cached
 // in the `PassOp` phase
 func (kv* KVPaxos) FormatPutAppendReply(id int64, reply *PutAppendReply) {
-	val := kv.opHistory[id]
-	reply.Err = val
+	_, ok := kv.opHistory[id]
+	if ok {
+	   reply.Err = OK
+	}
+
 }
 
 func (kv *KVPaxos) Get(args *GetArgs, reply *GetReply) error {
