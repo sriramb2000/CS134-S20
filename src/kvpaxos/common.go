@@ -5,6 +5,8 @@ const (
 	ErrNoKey = "ErrNoKey"
 )
 
+const RetryInterval = time.Millisecond * 100
+
 type Err string
 
 // Put or Append
