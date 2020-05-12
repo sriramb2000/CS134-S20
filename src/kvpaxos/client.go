@@ -70,7 +70,7 @@ func call(srv string, rpcname string,
 func (ck *Clerk) Get(key string) string {
 	// You will have to modify this function.
 	id := nrand()
-	args := &GetArgs{Key: key, Op: "Get", CurrId: id, PrevId: ck.doneId}
+	args := &GetArgs{Key: key, Op: "Get", Id: id, DoneId: ck.doneId}
 	var reply GetReply
 
 	ok := false
@@ -93,7 +93,7 @@ func (ck *Clerk) Get(key string) string {
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
 	id := nrand()
-	args := &PutAppendArgs{Key: key, Value: value, Op: op, CurrId: id, PrevId: ck.doneId}
+	args := &PutAppendArgs{Key: key, Value: value, Op: op, Id: id, DoneId: ck.doneId}
 	var reply PutAppendReply
 
 	ok := false
