@@ -1,9 +1,13 @@
 package kvpaxos
 
+import "time"
+
 const (
 	OK       = "OK"
 	ErrNoKey = "ErrNoKey"
 )
+
+const RetryInterval = time.Millisecond * 100
 
 type Err string
 

@@ -3,12 +3,14 @@ package kvpaxos
 import "net/rpc"
 import "crypto/rand"
 import "math/big"
+import "time"
 
 import "fmt"
 
 type Clerk struct {
 	servers []string
 	// You will have to modify this struct.
+	doneId int64
 }
 
 func nrand() int64 {
@@ -22,6 +24,7 @@ func MakeClerk(servers []string) *Clerk {
 	ck := new(Clerk)
 	ck.servers = servers
 	// You'll have to add code here.
+	ck.doneId = -1
 	return ck
 }
 
@@ -66,7 +69,22 @@ func call(srv string, rpcname string,
 //
 func (ck *Clerk) Get(key string) string {
 	// You will have to modify this function.
-	return ""
+	id := nrand()
+	args := &GetArgs{Key: key, Op: "Get", Id: id, DoneId: ck.doneId}
+	var reply GetReply
+
+	ok := false
+	for !ok {
+		for _, server := range ck.servers {
+			ok = call(server, "KVPaxos.Get", args, &reply)
+			if !ok {
+				time.Sleep(RetryInterval) // Set RetryInterval
+			}
+		}
+	}
+
+	ck.doneId = id 
+	return reply.Value 
 }
 
 //
@@ -74,6 +92,22 @@ func (ck *Clerk) Get(key string) string {
 //
 func (ck *Clerk) PutAppend(key string, value string, op string) {
 	// You will have to modify this function.
+	id := nrand()
+	args := &PutAppendArgs{Key: key, Value: value, Op: op, Id: id, DoneId: ck.doneId}
+	var reply PutAppendReply
+
+	ok := false
+	for !ok {
+		for _, server := range ck.servers {
+			ok = call(server, "KVPaxos.PutAppend", args, &reply)
+			if !ok {
+				time.Sleep(RetryInterval) // Set RetryInterval
+			}
+		}
+	}
+
+	ck.doneId = id
+	return
 }
 
 func (ck *Clerk) Put(key string, value string) {
