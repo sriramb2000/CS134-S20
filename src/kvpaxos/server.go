@@ -70,6 +70,7 @@ func (kv* KVPaxos) Consensify(seq int, val Op) Op {
 
 // Pass a Proposal ;D
 func (kv* KVPaxos) PassOp(proposalOp Op) error {
+	kv.ForgetOp(proposalOp.DoneId)
 	for {
 		seqNum := kv.currSeqNum
 		kv.currSeqNum++
@@ -84,7 +85,6 @@ func (kv* KVPaxos) PassOp(proposalOp Op) error {
 		}
 
 		kv.CommitOp(acceptedOp)
-		kv.ForgetOp(acceptedOp.DoneId)
 		kv.px.Done(seqNum) // This Paxos Peer can safely forget about this instance now that the value has been committed
 
 		if proposalOp.Id == acceptedOp.Id { // We can respond to client
