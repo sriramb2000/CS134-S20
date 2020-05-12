@@ -54,8 +54,8 @@ type Paxos struct {
 }
 
 type AcceptorState struct {
-	PromiseNumber int
-	AcceptNumber int
+	PromiseNumber int64
+	AcceptNumber int64
 	AcceptValue interface{}
 }
 
@@ -67,7 +67,7 @@ type Instance struct {
 // Prepare phase for Acceptor
 type PrepareArgs struct {
 	SequenceNum int
-	NewProposeNum int
+	NewProposeNum int64
 }
 
 type PrepareReply struct {
@@ -86,9 +86,9 @@ func (px *Paxos) PrepareHandler(args *PrepareArgs, reply *PrepareReply) error {
 		acceptorState := instance.AcceptorState
 		if newProposeNum > acceptorState.PromiseNumber {
 			acceptorState.PromiseNumber = newProposeNum
-
+			newAcceptorState := AcceptorState{PromiseNumber: newProposeNum, AcceptNumber:  acceptorState.AcceptNumber, AcceptValue:   acceptorState.AcceptValue,}
 			reply.Error = "OK"
-			reply.AcceptorState = acceptorState
+			reply.AcceptorState = &newAcceptorState
 		} else {
 			reply.Error = "Rejected"
 		}
@@ -105,7 +105,7 @@ func (px *Paxos) PrepareHandler(args *PrepareArgs, reply *PrepareReply) error {
 // Accept phase for Acceptor
 type AcceptArgs struct {
 	SequenceNum    int
-	NewAcceptNum   int
+	NewAcceptNum   int64
 	NewAcceptValue interface{}
 }
 
@@ -180,11 +180,9 @@ type DoneReply struct {
 }
 
 func (px *Paxos) DoneHandler(args *DoneArgs, reply *DoneReply) error {
-	px.mu.Lock()
-	defer px.mu.Unlock()
-
 	sequenceNum, peerIndex := args.SequenceNum, args.PeerIndex
 	if sequenceNum > px.DoneNumbersOfPaxosPeers[peerIndex] {
+		px.mu.Lock()
 		px.DoneNumbersOfPaxosPeers[peerIndex] = sequenceNum
 		minSequenceNumberToForget := px.Min()
 		for sequenceNumber, instance := range px.InstanceSlots {
@@ -192,6 +190,7 @@ func (px *Paxos) DoneHandler(args *DoneArgs, reply *DoneReply) error {
 				delete(px.InstanceSlots, sequenceNumber)
 			}
 		}
+		px.mu.Unlock()
 	}
 
 	reply.Error = "OK"
@@ -200,21 +199,34 @@ func (px *Paxos) DoneHandler(args *DoneArgs, reply *DoneReply) error {
 
 func (px *Paxos) Done(seq int) {
 	if seq > px.DoneNumbersOfPaxosPeers[px.me] {
+		args := DoneArgs{seq, px.me}
 		for i, peer := range px.peers {
-			args := DoneArgs{seq, px.me}
-			var reply DoneReply
-			if i == px.me {
-				px.DoneHandler(&args, &reply)
-			} else {
+			if i != px.me {
+				var reply DoneReply
 				ok := call(peer, "Paxos.DoneHandler", &args, &reply)
 				if !ok {
 					reply.Error = "NetworkError"
 				}
 			}
 		}
+
+		px.mu.Lock()
+		px.DoneNumbersOfPaxosPeers[px.me] = seq
+		minSequenceNumberToForget := px.Min()
+		for sequenceNumber, instance := range px.InstanceSlots {
+			if sequenceNumber < minSequenceNumberToForget && instance.isDecided {
+				delete(px.InstanceSlots, sequenceNumber)
+			}
+		}
+		px.mu.Unlock()
 	}
 }
 
+func GetProposalNum(value int32, peerId int32) int64 {
+	var mask int64 = int64(value) << 32
+	var uniqueProposalId int64 = int64(peerId) | mask
+	return uniqueProposalId
+}
 
 //
 // the application wants paxos to start agreement on
@@ -226,22 +238,20 @@ func (px *Paxos) Done(seq int) {
 func (px *Paxos) Start(seq int, v interface{}) {
 	go func(sequenceNum int, value interface{}) {
 		px.mu.Lock()
-		instance, ok := px.InstanceSlots[sequenceNum]
-		if ok && instance.isDecided {
-			return
-		} else if !ok {
+		_, ok := px.InstanceSlots[sequenceNum]
+		if !ok {
 			newAcceptorState := AcceptorState{PromiseNumber: -1, AcceptNumber:  -1, AcceptValue:   nil}
 			px.InstanceSlots[sequenceNum] = &Instance{isDecided: false, AcceptorState: &newAcceptorState}
 		}
 		px.mu.Unlock()
 
-		isDecided, _ := px.Status(sequenceNum)
-		for proposalNum := -1; !px.isdead() && isDecided != Decided && sequenceNum >= px.Min(); isDecided, _ = px.Status(sequenceNum) {
-			proposalNum = px.GetProposalNum(proposalNum)
-			
+
+		isDecided := false
+		var highestProposal int64 = -1
+		promiseValue := value
+
+		for proposalNum := GetProposalNum(int32(1), int32(px.me)); !px.isdead() && !isDecided && sequenceNum >= px.Min(); proposalNum++ {
 			// Prepare phase
-			var highestNProposed int = -1
-			promiseValue := value
 			prepareVote := 0
 			for i, peer := range px.peers {
 				args := PrepareArgs{sequenceNum, proposalNum}
@@ -260,8 +270,8 @@ func (px *Paxos) Start(seq int, v interface{}) {
 				// Keep count of vote
 				if reply.Error == "OK" {
 					prepareVote++
-					if reply.AcceptorState.AcceptNumber > highestNProposed {
-						highestNProposed = reply.AcceptorState.AcceptNumber
+					if reply.AcceptorState.AcceptNumber > highestProposal {
+						highestProposal = reply.AcceptorState.AcceptNumber
 						promiseValue = reply.AcceptorState.AcceptValue
 					}
 				}
@@ -295,12 +305,12 @@ func (px *Paxos) Start(seq int, v interface{}) {
 
 			// didn't get majority vote
 			if acceptVote <= len(px.peers) / 2 {
-				if highestNProposed > proposalNum {
-					proposalNum = highestNProposed
+				if highestProposal > proposalNum {
+					proposalNum = GetProposalNum(int32(highestProposal), int32(px.me))
 				}
 				continue
 			}
-			
+			isDecided  = true
 			for i, peer := range px.peers {
 				args := LearnArgs{sequenceNum, promiseValue}
 				var reply LearnReply
@@ -361,9 +371,9 @@ func (px *Paxos) Max() int {
 // instances.
 //
 func (px *Paxos) Min() int {
-	min := -1
+	min := px.DoneNumbersOfPaxosPeers[0]
 	for _, ele := range px.DoneNumbersOfPaxosPeers {
-		if min == -1 || ele < min {
+		if ele < min {
 			min = ele
 		}
 	}
@@ -535,11 +545,4 @@ func call(srv string, name string, args interface{}, reply interface{}) bool {
 
 	fmt.Println(err)
 	return false
-}
-
-func (px *Paxos) GetProposalNum(value int) int {
-	proposalNum := value + 1
-	for ;proposalNum % len(px.peers) != px.me; proposalNum++ {
-	}
-	return proposalNum
 }
