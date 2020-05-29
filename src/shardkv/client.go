@@ -13,6 +13,7 @@ type Clerk struct {
 	sm     *shardmaster.Clerk
 	config shardmaster.Config
 	// You'll have to modify Clerk.
+	doneId int64
 }
 
 func nrand() int64 {
@@ -26,6 +27,7 @@ func MakeClerk(shardmasters []string) *Clerk {
 	ck := new(Clerk)
 	ck.sm = shardmaster.MakeClerk(shardmasters)
 	// You'll have to modify MakeClerk.
+	ck.doneId = -1
 	return ck
 }
 
@@ -86,23 +88,22 @@ func (ck *Clerk) Get(key string) string {
 	ck.mu.Lock()
 	defer ck.mu.Unlock()
 
-	// You'll have to modify Get().
+	// You'll have to modify PutAppend().
+	currId := nrand()  //  generate a unique id for this request
 
 	for {
+		println("GET")
 		shard := key2shard(key)
-
 		gid := ck.config.Shards[shard]
-
 		servers, ok := ck.config.Groups[gid]
 
 		if ok {
-			// try each server in the shard's replication group.
 			for _, srv := range servers {
-				args := &GetArgs{}
-				args.Key = key
+				args := &GetArgs{Key: key, Id: currId, DoneId: ck.doneId, Op: "Get", ConfigNum: ck.config.Num}
 				var reply GetReply
 				ok := call(srv, "ShardKV.Get", args, &reply)
 				if ok && (reply.Err == OK || reply.Err == ErrNoKey) {
+					ck.doneId = currId
 					return reply.Value
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
@@ -124,27 +125,29 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 	defer ck.mu.Unlock()
 
 	// You'll have to modify PutAppend().
+	currId := nrand()  //  generate a unique id for this request
 
 	for {
+		println("PUTAPPEND")
 		shard := key2shard(key)
-
 		gid := ck.config.Shards[shard]
-
 		servers, ok := ck.config.Groups[gid]
 
 		if ok {
-			// try each server in the shard's replication group.
 			for _, srv := range servers {
-				args := &PutAppendArgs{}
+				args := &PutAppendArgs{Key: key, Value: value, Op: op, Id: currId, DoneId: ck.doneId, ConfigNum: ck.config.Num}
 				args.Key = key
 				args.Value = value
 				args.Op = op
 				var reply PutAppendReply
 				ok := call(srv, "ShardKV.PutAppend", args, &reply)
 				if ok && reply.Err == OK {
+					println("success: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
+					ck.doneId = currId
 					return
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
+					println("fail: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
 					break
 				}
 			}

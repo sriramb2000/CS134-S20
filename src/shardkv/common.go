@@ -13,6 +13,7 @@ const (
 	OK            = "OK"
 	ErrNoKey      = "ErrNoKey"
 	ErrWrongGroup = "ErrWrongGroup"
+	ErrNoDB       = "ErrNoDB"
 )
 
 type Err string
@@ -24,7 +25,9 @@ type PutAppendArgs struct {
 	// You'll have to add definitions here.
 	// Field names must start with capital letters,
 	// otherwise RPC will break.
-
+	Id int64
+	DoneId int64
+	ConfigNum int
 }
 
 type PutAppendReply struct {
@@ -34,6 +37,10 @@ type PutAppendReply struct {
 type GetArgs struct {
 	Key string
 	// You'll have to add definitions here.
+	Op  string
+	Id int64
+	DoneId int64
+	ConfigNum int
 }
 
 type GetReply struct {
@@ -41,3 +48,12 @@ type GetReply struct {
 	Value string
 }
 
+type DBSnapshotArgs struct {
+	ConfigNum int
+}
+
+type DBSnapshotReply struct {
+	Database    map[string]string
+	OpHistory   map[int64]string
+	Err         Err
+}
