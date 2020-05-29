@@ -92,7 +92,7 @@ func (ck *Clerk) Get(key string) string {
 	currId := nrand()  //  generate a unique id for this request
 
 	for {
-		println("GET")
+		//println("GET")
 		shard := key2shard(key)
 		gid := ck.config.Shards[shard]
 		servers, ok := ck.config.Groups[gid]
@@ -107,6 +107,7 @@ func (ck *Clerk) Get(key string) string {
 					return reply.Value
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
+					//println("GET WrongGroup")
 					break
 				}
 			}
@@ -128,7 +129,7 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 	currId := nrand()  //  generate a unique id for this request
 
 	for {
-		println("PUTAPPEND")
+		//println("PUTAPPEND")
 		shard := key2shard(key)
 		gid := ck.config.Shards[shard]
 		servers, ok := ck.config.Groups[gid]
@@ -142,12 +143,12 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 				var reply PutAppendReply
 				ok := call(srv, "ShardKV.PutAppend", args, &reply)
 				if ok && reply.Err == OK {
-					println("success: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
+					//println("success: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
 					ck.doneId = currId
 					return
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
-					println("fail: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
+					//println("fail: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
 					break
 				}
 			}

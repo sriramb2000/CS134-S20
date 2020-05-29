@@ -62,6 +62,8 @@ func (kv *ShardKV) Get(args *GetArgs, reply *GetReply) error {
 
 	shard := key2shard(args.Key)
 	if kv.config.Num != args.ConfigNum || kv.config.Shards[shard] != kv.gid {
+		//println("server config num", kv.config.Num)
+		//println("client config num", args.ConfigNum)
 		reply.Err = ErrWrongGroup
 		return nil
 	}
@@ -127,7 +129,6 @@ func (kv* ShardKV) PassOp(proposalOp Op) error {
 // Runs Paxos until some Consensus Op is reached for the given sequence numebr
 func (kv* ShardKV) Consensify(seq int, val Op) Op {
 	kv.px.Start(seq, val)
-
 	to := 10 * time.Millisecond
 	for {
 		status, value := kv.px.Status(seq)
@@ -149,6 +150,8 @@ func (kv* ShardKV) CommitOp(operation Op) {
 	if txnType == "Reconfigure" {
 		kv.Reconfigure(operation.ConfigNum)
 	} else if kv.config.Num != configNum {
+		//println("server config num", kv.config.Num)
+		//println("client config num", configNum)
 		res = ErrWrongGroup
 	} else if txnType == "Get" {
 		if ok {
@@ -157,15 +160,15 @@ func (kv* ShardKV) CommitOp(operation Op) {
 			res = ErrNoKey
 		}
 	} else if txnType == "Put" {
-		println("gid: ", kv.gid, " ,me: ", kv.me," ,put: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
+		//println("gid: ", kv.gid, " ,me: ", kv.me," ,put: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
 		kv.db[key] = val
 		res = OK
 	} else if txnType == "Append" {
 		if ok {
-			println("gid: ", kv.gid, " ,me: ", kv.me," ,append: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
+			//println("gid: ", kv.gid, " ,me: ", kv.me," ,append: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
 			kv.db[key] = curVal + val
 		} else {
-			println("gid: ", kv.gid, " ,me: ", kv.me," ,appendput: ", val, " , curr config: ", kv.config.Num, ", opId: ", id)
+			//println("gid: ", kv.gid, " ,me: ", kv.me," ,appendput: ", val, " , curr config: ", kv.config.Num, ", opId: ", id)
 			kv.db[key] = val
 		}
 		res = OK
@@ -373,9 +376,9 @@ func StartServer(gid int64, shardmasters []string,
 // Assumes that another request with the same ID will not arrive before this request is cleared from history
 func (kv *ShardKV) IsDuplicateGet(args *GetArgs) bool {
 	id := args.Id
-	_, ok := kv.opHistory[id]
-
-	return ok
+	res, ok := kv.opHistory[id]
+	//println("duplicate get", res)
+	return ok && res != ErrWrongGroup
 }
 
 // Assumes that another request with the same ID will not arrive before this request is cleared from history
