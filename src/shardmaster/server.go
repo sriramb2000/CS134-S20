@@ -67,10 +67,10 @@ func (l GroupCountList) Insert(gc GroupCount) GroupCountList {
 func (l GroupCountList) PopMin() (GroupCount, GroupCountList) {
 	if (len(l) == 0) {
 		return GroupCount{}, l
+	} else if (len(l) == 1) {
+		return l[0], l[:0]
 	}
-	min := l[0]
-	l = l[1:]
-	return min, l
+	return l[0], l[1:]
 }
 func (l GroupCountList) GetMin() GroupCount { 
 	if (len(l) < 1) {
@@ -81,10 +81,11 @@ func (l GroupCountList) GetMin() GroupCount {
 func (l GroupCountList) PopMax() (GroupCount, GroupCountList) {
 	if (len(l) == 0) {
 		return GroupCount{}, l
+	} else if (len(l) == 1) {
+		return l[0], l[:0]
 	}
-	max := l[len(l) - 1]
-	l = l[:len(l)-1]
-	return max, l
+
+	return  l[len(l) - 1], l[:len(l)-1]
 }
 func (l GroupCountList) GetMax() GroupCount { 
 	if (len(l) < 1) {
@@ -92,6 +93,9 @@ func (l GroupCountList) GetMax() GroupCount {
 	}
 	return l[len(l) - 1] 
 }
+func (l GroupCountList) Range() int { return l.GetMax().numShards - l.GetMin().numShards }
+
+
 
 func nrand() int64 {
 	max := big.NewInt(int64(1) << 62)
@@ -106,11 +110,10 @@ func (sm* ShardMaster) NextConfig() *Config {
 
 	nextConfig := Config{}
 	nextConfig.Num = lastConfig.Num + 1
-	for shardNum, gid := range(lastConfig.Shards) {
-		nextConfig.Shards[shardNum] = gid
-	}
-	nextConfig.Groups = make(map[int64][]string)
-	for gid, servers := range(lastConfig.Groups) {
+	copy(nextConfig.Shards, lastConfig.Shards) // Copy Shards Array
+	
+	nextConfig.Groups = make(map[int64][]string) // Manually Copy Map
+	for gid, servers := range lastConfig.Groups {
 		nextConfig.Groups[gid] = servers
 	}
 	
@@ -122,20 +125,56 @@ func (sm* ShardMaster) BuildSortedList(config *Config) GroupCountList {
 
 	shardCount := make(map[int64]int)
 	// initialize empty count map
-	for gid, _ := range(config.Groups) {
+	for gid, _ := range config.Groups {
 		shardCount[gid] = 0
 	}
 	// populate count map
-	for _, gid := range(config.Shards) {
+	for _, gid := range config.Shards {
 		_, ok = config.Groups[group] // make sure that the gid is valid
 		if (ok) {
 			shardCount[gid]++
 		}
 	}
-	// populate heap
-	for gid, count := range(shardCount) {
+	// populate Sorted List
+	for gid, count := range shardCount {
 		tmp := GroupCount{gid, count}
 		gcl = gcl.Insert(tmp)
+	}
+
+	return gcl
+}
+
+// Will assign replica groups to all shards with gid == 0 or gid == removedGid
+func (sm* ShardMaster) ReassignShards(config *Config, removedGid int64) {
+	gcl := sm.BuildSortedList(config)
+	for shard, gid := range config.Shards {
+		if (gid == 0 || gid == removedGid) {
+			tmp, gcl = gcl.PopMin() // Get Group with minimum number of shards
+			config.Shards[shard] = tmp.gid // Assign this shard to the min group
+			tmp.numShards++ // Increase number of shards of this group
+			gcl = gcl.Insert(tmp) // Re-insert into sorted list
+		}
+	}
+}
+
+// Balance Shard distribution after Group removedGid leaves (can be used with removedGid = 0 for initilization)
+func (sm* ShardMaster) Balancify(config *Config, removedGid int64) {
+	sm.ReassignShards(config, removedGid)
+	gcl := sm.BuildSortedList(config)
+	for gcl.Range() > 1 { // While not balanced
+		for shard, gid := range config.Shards {
+			if (gcl.Range() <= 1) { break } // Minimize Shard movement by early exit
+			max := gcl.GetMax()
+			if (gid == max.gid) {
+				max, gcl := gcl.PopMax()
+				min, gcl := gcl.PopMin()
+				config.Shards[shard] = min.gid
+				max.numShards--
+				min.numShards++
+				gcl = gcl.Insert(max)
+				gcl = gcl.Insert(min)
+			}
+		}
 	}
 }
 
@@ -156,7 +195,7 @@ func (sm* ShardMaster) Consensify(seq int, val Op) Op {
 	}
 }
 
-func (sm* KVPaxos) PassOp(proposalOp Op) error {
+func (sm* KVPaxos) PassOp(proposalOp Op) Config {
 	for {
 		seqNum := sm.currSeqNum
 		sm.currSeqNum++
@@ -170,42 +209,112 @@ func (sm* KVPaxos) PassOp(proposalOp Op) error {
 			acceptedOp = sm.Consensify(seqNum, proposalOp)
 		}
 
-		sm.CommitOp(acceptedOp)
+		config := sm.CommitOp(acceptedOp)
 		sm.px.Done(seqNum) // This Paxos Peer can safely forget about this instance now that the value has been committed
 
 		if proposalOp.Id == acceptedOp.Id { // We can respond to client
-			break
+			return config
 		}
 	}
-	return nil
+	return Config{}
 }
 
-func (sm *ShardMaster) CommitOp(operation Op) {
-
+func (sm *ShardMaster) CommitOp(operation Op) *Config {
+	if (Op.OpType == "Join") {
+		sm.CommitJoin(operation)
+	} else if (Op.OpType == "Leave") {
+		sm.CommitLeave(operation)
+	} else if (Op.OpType == "Move") {
+		sm.CommitMove(operation)
+	} else if (Op.OpType == "Query") {
+		return sm.CommitQuery(operation)
+	}
+	return Config{}
 }
 
+func (sm *ShardMaster) CommitJoin(operation Op) {
+	// Get New Config
+	nextConfig := sm.NextConfig()
+	// Add new Group
+	nextConfig.Groups[operation.Gid] = operation.Servers 
+	// Call with removedGid = 0 because nothing is being removed
+	sm.Balancify(nextConfig, 0) 
+ 	// Add latest config to ShardMaster config list	
+	sm.configs = append(sm.configs, *nextConfig)
+}
 
 func (sm *ShardMaster) Join(args *JoinArgs, reply *JoinReply) error {
 	// Your code here.
+	sm.mu.Lock()
+	defer sm.mu.Unlock()
 
+	proposalOp := Op{OpType: "Join", Id: nrand(), Gid: args.GID, Servers: args.Servers}
+	sm.PassOp(proposalOp)
+	
 	return nil
+}
+
+func (sm *ShardMaster) CommitLeave(operation Op) {
+	// Get New Config
+	nextConfig := sm.NextConfig()
+	// Remove Group
+	delete(nextConfig.Groups,operation.Gid)
+	// Reassign shards with gid = operation.Gid and balance
+	sm.Balancify(nextConfig, operation.Gid) 
+ 	// Add latest config to ShardMaster config list	
+	sm.configs = append(sm.configs, *nextConfig)
 }
 
 func (sm *ShardMaster) Leave(args *LeaveArgs, reply *LeaveReply) error {
 	// Your code here.
+	sm.mu.Lock()
+	defer sm.mu.Unlock()
 
+	proposalOp := Op{OpType: "Leave", Id: nrand(), Gid: args.GID}
+	sm.PassOp(proposalOp)
+	
 	return nil
+}
+
+func (sm *ShardMaster) CommitMove(operation Op) {
+	// Get New Config
+	nextConfig := sm.NextConfig()
+	// Move Shard operation.ShardNum
+	nextConfig.Shards[operation.ShardNum] = operation.Gid
+	// Should not rebalance (runs the risk of shard operation.ShardNum being reassigned)
+ 	// Add latest config to ShardMaster config list	
+	sm.configs = append(sm.configs, *nextConfig)
 }
 
 func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) error {
 	// Your code here.
+	sm.mu.Lock()
+	defer sm.mu.Unlock()
+
+	proposalOp := Op{OpType: "Move", Id: nrand(), Gid: args.GID, ShardNum: args.Shard}
+	sm.PassOp(proposalOp)
 
 	return nil
 }
 
+func (sm *ShardMaster) CommitQuery(operation Op) *Config{
+	if (operation.ConfigNum == 0 || operation.ConfigNum > len(sm.configs)) { // If invalid config num, return latest known
+		return sm.configs[len(sm.configs) - 1]
+	} else {
+		return sm.configs[operation.ConfigNum]
+	}
+}
+
 func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) error {
 	// Your code here.
+	sm.mu.Lock()
+	defer sm.mu.Unlock()
 
+	proposalOp := Op{OpType: "Query", Id: nrand(), ConfigNum: args.Num}
+	config := sm.PassOp(proposalOp)
+
+	reply.Config = config
+	
 	return nil
 }
 
@@ -246,6 +355,7 @@ func StartServer(servers []string, me int) *ShardMaster {
 
 	sm.configs = make([]Config, 1)
 	sm.configs[0].Groups = map[int64][]string{}
+	sm.currSeqNum = 0
 
 	rpcs := rpc.NewServer()
 
