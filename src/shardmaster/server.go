@@ -65,17 +65,33 @@ func (l GroupCountList) Insert(gc GroupCount) GroupCountList {
 	}
 }
 func (l GroupCountList) PopMin() (GroupCount, GroupCountList) {
+	if (len(l) == 0) {
+		return GroupCount{}, l
+	}
 	min := l[0]
 	l = l[1:]
 	return min, l
 }
-func (l GroupCountList) GetMin() GroupCount { return l[0] }
+func (l GroupCountList) GetMin() GroupCount { 
+	if (len(l) < 1) {
+		return GroupCount{}
+	}
+	return l[0] 
+}
 func (l GroupCountList) PopMax() (GroupCount, GroupCountList) {
+	if (len(l) == 0) {
+		return GroupCount{}, l
+	}
 	max := l[len(l) - 1]
 	l = l[:len(l)-1]
 	return max, l
 }
-func (l GroupCountList) GetMax() GroupCount { return l[len(l) - 1] }
+func (l GroupCountList) GetMax() GroupCount { 
+	if (len(l) < 1) {
+		return GroupCount{}
+	}
+	return l[len(l) - 1] 
+}
 
 func nrand() int64 {
 	max := big.NewInt(int64(1) << 62)
@@ -101,7 +117,7 @@ func (sm* ShardMaster) NextConfig() *Config {
 	return &nextConfig
 }
 
-func (sm* ShardMaster) BuildSorted(config *Config) GroupCountList {
+func (sm* ShardMaster) BuildSortedList(config *Config) GroupCountList {
 	gcl := GroupCountList{}
 
 	shardCount := make(map[int64]int)
@@ -119,8 +135,7 @@ func (sm* ShardMaster) BuildSorted(config *Config) GroupCountList {
 	// populate heap
 	for gid, count := range(shardCount) {
 		tmp := GroupCount{gid, count}
-		heap.Push(&min, &tmp)
-		heap.Push(&max, &tmp)
+		gcl = gcl.Insert(tmp)
 	}
 }
 
