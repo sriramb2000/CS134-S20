@@ -12,6 +12,8 @@ import "os"
 import "syscall"
 import "encoding/gob"
 import "math/rand"
+import crand "crypto/rand"
+import "math/big"
 
 import "sort"
 
@@ -110,7 +112,9 @@ func (sm* ShardMaster) NextConfig() *Config {
 
 	nextConfig := Config{}
 	nextConfig.Num = lastConfig.Num + 1
-	copy(nextConfig.Shards, lastConfig.Shards) // Copy Shards Array
+	for shard, gid := rnage lastConfig.Shards { // Manually Shards Array
+		nextConfig.Shards[shard] = gid
+	}
 	
 	nextConfig.Groups = make(map[int64][]string) // Manually Copy Map
 	for gid, servers := range lastConfig.Groups {
