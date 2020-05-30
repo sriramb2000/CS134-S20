@@ -13,6 +13,8 @@ import "syscall"
 import "encoding/gob"
 import "math/rand"
 
+import "sort"
+
 type ShardMaster struct {
 	mu         sync.Mutex
 	l          net.Listener
@@ -22,11 +24,152 @@ type ShardMaster struct {
 	px         *paxos.Paxos
 
 	configs []Config // indexed by config num
+	currSeqNum int
 }
 
 
 type Op struct {
 	// Your data here.
+	OpType    string
+	Id		  int64
+	Gid		  int64
+	Servers   []string
+	ShardNum  int
+	ConfigNum int	
+}
+
+
+// Sorted List to help Rebalance Load 
+type GroupCount struct {
+	gid int64
+	numShards int
+}
+
+type GroupCountList []GroupCount
+
+func (l GroupCountList) Init() { sort.Sort(l) }
+func (l GroupCountList) Len() int { return len(l) }
+func (l GroupCountList) Less(i, j int) bool { return l[i].numShards < l[j].numShards }
+func (l GroupCountList) Swap(i, j int) { l[i], l[j] = l[j], l[i] }
+func (l GroupCountList) Insert(gc GroupCount) GroupCountList {
+	i := sort.Search(len(l), func(j int) bool { return l[j].numShards >= gc.numShards })
+	if (i < len(l) && l[i].gid == gc.gid) {
+		return l
+	} else {
+		l = append(l, GroupCount{})
+		if (i < len(l)) {
+		 copy(l[i+1:], l[i:])
+		}
+		l[i] = gc
+		return l
+	}
+}
+func (l GroupCountList) PopMin() (GroupCount, GroupCountList) {
+	min := l[0]
+	l = l[1:]
+	return min, l
+}
+func (l GroupCountList) GetMin() { return l[0] }
+func (l GroupCountList) PopMax() (GroupCount, GroupCountList) {
+	max := l[len(l) - 1]
+	l = l[:len(l)-1]
+	return max, l
+}
+func (l GroupCountList) GetMax() { return l[len(l) - 1] }
+
+func nrand() int64 {
+	max := big.NewInt(int64(1) << 62)
+	bigx, _ := crand.Int(crand.Reader, max)
+	x := bigx.Int64()
+	return x
+}
+
+// Initialize a copy of the latest conifiguration
+func (sm* ShardMaster) NextConfig() *Config {
+	lastConfig := &sm.configs[len(sm.configs) - 1];
+
+	nextConfig := Config{}
+	nextConfig.Num = lastConfig.Num + 1
+	for shardNum, gid := range(lastConfig.Shards) {
+		nextConfig.Shards[shardNum] = gid
+	}
+	nextConfig.Groups = make(map[int64][]string)
+	for gid, servers := range(lastConfig.Groups) {
+		nextConfig.Groups[gid] = servers
+	}
+	
+	return &nextConfig
+}
+
+func (sm* ShardMaster) BuildSorted(config *Config) {
+	min := make(MinHeap, 0)
+	max := make(MaxHeap, 0)
+	heap.Init(&min)
+	heap.Init(&max)
+
+	shardCount := make(map[int64]int)
+	// initialize empty count map
+	for gid, _ := range(config.Groups) {
+		shardCount[gid] = 0
+	}
+	// populate count map
+	for _, gid := range(config.Shards) {
+		_, ok = config.Groups[group] // make sure that the gid is valid
+		if (ok) {
+			shardCount[gid]++
+		}
+	}
+	// populate heap
+	for gid, count := range(shardCount) {
+		tmp := GroupCount{gid, count}
+		heap.Push(&min, &tmp)
+		heap.Push(&max, &tmp)
+	}
+}
+
+// Runs Paxos until some Consensus Op is reached for the given sequence numebr
+func (sm* ShardMaster) Consensify(seq int, val Op) Op {
+	sm.px.Start(seq, val)
+
+	to := 10 * time.Millisecond
+	for {
+		status, value := sm.px.Status(seq)
+		if status == paxos.Decided {
+			return value.(Op) // cast to Op
+		}
+		time.Sleep(to)
+		if to < 10 * time.Second {
+			to *= 2
+		}
+	}
+}
+
+func (sm* KVPaxos) PassOp(proposalOp Op) error {
+	for {
+		seqNum := sm.currSeqNum
+		sm.currSeqNum++
+
+		status, res := sm.px.Status(seqNum)
+
+		var acceptedOp Op
+		if status == paxos.Decided { // If this instance has already been decided, proceed with decided value
+			acceptedOp = res.(Op)
+		} else { // Otherwise propose our own Op
+			acceptedOp = sm.Consensify(seqNum, proposalOp)
+		}
+
+		sm.CommitOp(acceptedOp)
+		sm.px.Done(seqNum) // This Paxos Peer can safely forget about this instance now that the value has been committed
+
+		if proposalOp.Id == acceptedOp.Id { // We can respond to client
+			break
+		}
+	}
+	return nil
+}
+
+func (sm *ShardMaster) CommitOp(operation Op) {
+
 }
 
 
