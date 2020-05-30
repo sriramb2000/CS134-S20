@@ -112,7 +112,7 @@ func (sm* ShardMaster) NextConfig() *Config {
 
 	nextConfig := Config{}
 	nextConfig.Num = lastConfig.Num + 1
-	for shard, gid := rnage lastConfig.Shards { // Manually Shards Array
+	for shard, gid := range lastConfig.Shards { // Manually Shards Array
 		nextConfig.Shards[shard] = gid
 	}
 	
@@ -134,7 +134,7 @@ func (sm* ShardMaster) BuildSortedList(config *Config) GroupCountList {
 	}
 	// populate count map
 	for _, gid := range config.Shards {
-		_, ok = config.Groups[group] // make sure that the gid is valid
+		_, ok := config.Groups[gid] // make sure that the gid is valid
 		if (ok) {
 			shardCount[gid]++
 		}
@@ -153,7 +153,7 @@ func (sm* ShardMaster) ReassignShards(config *Config, removedGid int64) {
 	gcl := sm.BuildSortedList(config)
 	for shard, gid := range config.Shards {
 		if (gid == 0 || gid == removedGid) {
-			tmp, gcl = gcl.PopMin() // Get Group with minimum number of shards
+			tmp, gcl := gcl.PopMin() // Get Group with minimum number of shards
 			config.Shards[shard] = tmp.gid // Assign this shard to the min group
 			tmp.numShards++ // Increase number of shards of this group
 			gcl = gcl.Insert(tmp) // Re-insert into sorted list
