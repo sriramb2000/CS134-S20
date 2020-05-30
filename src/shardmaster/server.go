@@ -69,13 +69,13 @@ func (l GroupCountList) PopMin() (GroupCount, GroupCountList) {
 	l = l[1:]
 	return min, l
 }
-func (l GroupCountList) GetMin() { return l[0] }
+func (l GroupCountList) GetMin() GroupCount { return l[0] }
 func (l GroupCountList) PopMax() (GroupCount, GroupCountList) {
 	max := l[len(l) - 1]
 	l = l[:len(l)-1]
 	return max, l
 }
-func (l GroupCountList) GetMax() { return l[len(l) - 1] }
+func (l GroupCountList) GetMax() GroupCount { return l[len(l) - 1] }
 
 func nrand() int64 {
 	max := big.NewInt(int64(1) << 62)
@@ -101,11 +101,8 @@ func (sm* ShardMaster) NextConfig() *Config {
 	return &nextConfig
 }
 
-func (sm* ShardMaster) BuildSorted(config *Config) {
-	min := make(MinHeap, 0)
-	max := make(MaxHeap, 0)
-	heap.Init(&min)
-	heap.Init(&max)
+func (sm* ShardMaster) BuildSorted(config *Config) GroupCountList {
+	gcl := GroupCountList{}
 
 	shardCount := make(map[int64]int)
 	// initialize empty count map
