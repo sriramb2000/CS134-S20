@@ -112,7 +112,7 @@ func (sm* ShardMaster) NextConfig() *Config {
 
 	nextConfig := Config{}
 	nextConfig.Num = lastConfig.Num + 1
-	for shard, gid := rnage lastConfig.Shards { // Manually Shards Array
+	for shard, gid := range lastConfig.Shards { // Manually Shards Array
 		nextConfig.Shards[shard] = gid
 	}
 	
