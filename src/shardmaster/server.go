@@ -202,8 +202,9 @@ func (sm* ShardMaster) Consensify(seq int, val Op) Op {
 
 func (sm* ShardMaster) PassOp(proposalOp Op) Config {
 	for {
-		seqNum := sm.currSeqNum
 		sm.currSeqNum++
+		seqNum := sm.currSeqNum
+
 
 		status, res := sm.px.Status(seqNum)
 
@@ -234,7 +235,8 @@ func (sm *ShardMaster) CommitOp(operation Op) Config {
 	} else if (operation.OpType == "Query") {
 		return sm.CommitQuery(operation)
 	}
-	return &Config{}
+	//return &Config{}
+	return sm.configs[0]
 }
 
 func (sm *ShardMaster) CommitJoin(operation Op) {
@@ -303,7 +305,7 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) error {
 }
 
 func (sm *ShardMaster) CommitQuery(operation Op) Config{
-	if (operation.ConfigNum == 0 || operation.ConfigNum > len(sm.configs)) { // If invalid config num, return latest known
+	if (operation.ConfigNum == -1 || operation.ConfigNum >= len(sm.configs)) { // If invalid config num, return latest known
 		return sm.configs[len(sm.configs) - 1]
 	} else {
 		return sm.configs[operation.ConfigNum]
