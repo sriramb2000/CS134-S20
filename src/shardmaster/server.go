@@ -5,6 +5,7 @@ import "fmt"
 import "net/rpc"
 import "log"
 
+import crand "crypto/rand"
 import "paxos"
 import "sync"
 import "sync/atomic"
@@ -12,8 +13,8 @@ import "os"
 import "syscall"
 import "encoding/gob"
 import "math/rand"
-import crand "crypto/rand"
 import "math/big"
+import "time"
 
 import "sort"
 
@@ -199,7 +200,7 @@ func (sm* ShardMaster) Consensify(seq int, val Op) Op {
 	}
 }
 
-func (sm* KVPaxos) PassOp(proposalOp Op) Config {
+func (sm* ShardMaster) PassOp(proposalOp Op) Config {
 	for {
 		seqNum := sm.currSeqNum
 		sm.currSeqNum++
@@ -223,14 +224,14 @@ func (sm* KVPaxos) PassOp(proposalOp Op) Config {
 	return Config{}
 }
 
-func (sm *ShardMaster) CommitOp(operation Op) *Config {
-	if (Op.OpType == "Join") {
+func (sm *ShardMaster) CommitOp(operation Op) Config {
+	if (operation.OpType == "Join") {
 		sm.CommitJoin(operation)
-	} else if (Op.OpType == "Leave") {
+	} else if (operation.OpType == "Leave") {
 		sm.CommitLeave(operation)
-	} else if (Op.OpType == "Move") {
+	} else if (operation.OpType == "Move") {
 		sm.CommitMove(operation)
-	} else if (Op.OpType == "Query") {
+	} else if (operation.OpType == "Query") {
 		return sm.CommitQuery(operation)
 	}
 	return Config{}
@@ -301,7 +302,7 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) error {
 	return nil
 }
 
-func (sm *ShardMaster) CommitQuery(operation Op) *Config{
+func (sm *ShardMaster) CommitQuery(operation Op) Config{
 	if (operation.ConfigNum == 0 || operation.ConfigNum > len(sm.configs)) { // If invalid config num, return latest known
 		return sm.configs[len(sm.configs) - 1]
 	} else {
