@@ -1,0 +1,2624 @@
+2020/05/30 20:53:11 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:11 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:11 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:11 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+Test: Basic Join/Leave ...
+  ... Passed
+2020/05/30 20:53:17 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:17 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:17 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:17 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+Test: Shards really move ...
+  ... Passed
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-movem-2: connect: no such file or directory
+2020/05/30 20:53:33 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-movem-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-movem-2: connect: no such file or directory
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:33 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:33 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:33 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+Test: Reconfiguration with some dead replicas ...
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-3: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limps-7: connect: no such file or directory
+  ... Passed
+Test: Concurrent Put/Get/Move ...
+2020/05/30 20:53:40 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limpm-2: connect: no such file or directory
+2020/05/30 20:53:40 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limpm-1: connect: no such file or directory
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-limpm-2: connect: no such file or directory
+2020/05/30 20:53:40 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:40 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:40 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:40 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:40 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:40 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:40 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:41 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:41 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:41 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:41 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:41 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:41 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:41 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:41 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:41 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:41 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:41 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+  ... Passed
+Test: Concurrent Put/Get/Move (unreliable) ...
+2020/05/30 20:53:46 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Balancify" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "BuildSortedList" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitJoin" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitLeave" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitMove" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitQuery" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardmaster.Op"
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "NextConfig" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "ReassignShards" is not a pointer: "int64"
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-concurrent-falsem-1: connect: no such file or directory
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-32540-concurrent-falsem-2: connect: no such file or directory
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "CommitOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Consensify" is not a pointer: "shardkv.Op"
+2020/05/30 20:53:46 rpc.Register: method "FormatGetReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "FormatPutAppendReply" has 0 output parameters; needs exactly one
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicateGet" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "IsDuplicatePutAppend" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "PassOp" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Reconfigure" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Setunreliable" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Done" has 2 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Kill" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Max" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: method "Min" has 1 input parameters; needs exactly three
+2020/05/30 20:53:46 rpc.Register: reply type of method "Start" is not a pointer: "interface {}"
+2020/05/30 20:53:46 rpc.Register: method "Status" has 2 input parameters; needs exactly three
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-7: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-0: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: read: connection reset by peer
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-3: read: connection reset by peer
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-2: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-8: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-6: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-4: write: broken pipe
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+write unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-5: write: broken pipe
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+unexpected EOF
+read unix @->/var/tmp/824-5534/skv-32540-concurrent-trues-1: read: connection reset by peer
+--- FAIL: TestConcurrentUnreliable (5.43s)
+    test_test.go:330: Get(4) expected 14002256782303547313017639626915591226431679157210983445 got 140022567823035473130176396269155912264316791572109834456431679157210983445
+    test_test.go:345: something is wrong
+FAIL
+exit status 1
+FAIL	shardkv	40.375s

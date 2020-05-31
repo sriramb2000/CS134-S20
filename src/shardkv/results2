@@ -1,0 +1,200 @@
+test 1
+  ... Passed
+PASS
+ok  	shardkv	39.342s
+test 2
+  ... Passed
+PASS
+ok  	shardkv	39.867s
+test 3
+  ... Passed
+PASS
+ok  	shardkv	38.270s
+test 4
+  ... Passed
+PASS
+ok  	shardkv	39.087s
+test 5
+  ... Passed
+PASS
+ok  	shardkv	39.349s
+test 6
+  ... Passed
+PASS
+ok  	shardkv	39.155s
+test 7
+  ... Passed
+PASS
+ok  	shardkv	39.857s
+test 8
+  ... Passed
+PASS
+ok  	shardkv	39.479s
+test 9
+  ... Passed
+PASS
+ok  	shardkv	39.320s
+test 10
+  ... Passed
+PASS
+ok  	shardkv	39.404s
+test 11
+  ... Passed
+PASS
+ok  	shardkv	38.958s
+test 12
+PASS
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-19431-concurrent-truem-1: connect: no such file or directory
+ok  	shardkv	40.374s
+test 13
+  ... Passed
+PASS
+ok  	shardkv	40.126s
+test 14
+  ... Passed
+PASS
+ok  	shardkv	40.497s
+test 15
+  ... Passed
+PASS
+ok  	shardkv	40.588s
+test 16
+  ... Passed
+PASS
+ok  	shardkv	39.740s
+test 17
+  ... Passed
+PASS
+ok  	shardkv	40.134s
+test 18
+  ... Passed
+PASS
+ok  	shardkv	39.047s
+test 19
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-45145-concurrent-trues-8: connect: no such file or directory
+PASS
+ok  	shardkv	39.418s
+test 20
+  ... Passed
+PASS
+ok  	shardkv	40.140s
+test 21
+  ... Passed
+PASS
+ok  	shardkv	40.622s
+test 22
+  ... Passed
+PASS
+ok  	shardkv	40.170s
+test 23
+  ... Passed
+PASS
+ok  	shardkv	39.073s
+test 24
+paxos Dial() failed: dial unix /var/tmp/824-5534/skv-7867-concurrent-truem-2: connect: no such file or directory
+PASS
+ok  	shardkv	38.695s
+test 25
+  ... Passed
+PASS
+ok  	shardkv	39.392s
+test 26
+  ... Passed
+PASS
+ok  	shardkv	38.932s
+test 27
+  ... Passed
+PASS
+ok  	shardkv	39.047s
+test 28
+	/usr/local/cs/go1.13.4/go/src/net/rpc/client.go:206 +0x89
+exit status 2
+FAIL	shardkv	34.077s
+test 29
+  ... Passed
+PASS
+ok  	shardkv	38.677s
+test 30
+  ... Passed
+PASS
+ok  	shardkv	40.484s
+test 31
+  ... Passed
+PASS
+ok  	shardkv	39.105s
+test 32
+  ... Passed
+PASS
+ok  	shardkv	40.321s
+test 33
+  ... Passed
+PASS
+ok  	shardkv	39.932s
+test 34
+  ... Passed
+PASS
+ok  	shardkv	40.057s
+test 35
+FAIL
+exit status 1
+FAIL	shardkv	39.910s
+test 36
+  ... Passed
+PASS
+ok  	shardkv	39.946s
+test 37
+  ... Passed
+PASS
+ok  	shardkv	40.477s
+test 38
+  ... Passed
+PASS
+ok  	shardkv	40.308s
+test 39
+  ... Passed
+PASS
+ok  	shardkv	40.403s
+test 40
+write unix @->/var/tmp/824-5534/skv-28442-concurrent-truem-2: write: broken pipe
+PASS
+ok  	shardkv	39.846s
+test 41
+  ... Passed
+PASS
+ok  	shardkv	39.266s
+test 42
+  ... Passed
+PASS
+ok  	shardkv	40.072s
+test 43
+  ... Passed
+PASS
+ok  	shardkv	39.563s
+test 44
+  ... Passed
+PASS
+ok  	shardkv	39.183s
+test 45
+  ... Passed
+PASS
+ok  	shardkv	39.945s
+test 46
+  ... Passed
+PASS
+ok  	shardkv	39.350s
+test 47
+  ... Passed
+PASS
+ok  	shardkv	39.901s
+test 48
+FAIL
+exit status 1
+FAIL	shardkv	40.375s
+test 49
+  ... Passed
+PASS
+ok  	shardkv	38.733s
+test 50
+  ... Passed
+PASS
+ok  	shardkv	40.120s
