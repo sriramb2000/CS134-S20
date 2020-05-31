@@ -5,6 +5,7 @@ import "fmt"
 import "net/rpc"
 import "log"
 
+import crand "crypto/rand"
 import "paxos"
 import "sync"
 import "sync/atomic"
@@ -12,8 +13,8 @@ import "os"
 import "syscall"
 import "encoding/gob"
 import "math/rand"
-import crand "crypto/rand"
 import "math/big"
+import "time"
 
 import "sort"
 
@@ -199,7 +200,7 @@ func (sm* ShardMaster) Consensify(seq int, val Op) Op {
 	}
 }
 
-func (sm* KVPaxos) PassOp(proposalOp Op) Config {
+func (sm* ShardMaster) PassOp(proposalOp Op) Config {
 	for {
 		seqNum := sm.currSeqNum
 		sm.currSeqNum++
@@ -233,7 +234,7 @@ func (sm *ShardMaster) CommitOp(operation Op) *Config {
 	} else if (Op.OpType == "Query") {
 		return sm.CommitQuery(operation)
 	}
-	return Config{}
+	return &Config{}
 }
 
 func (sm *ShardMaster) CommitJoin(operation Op) {
