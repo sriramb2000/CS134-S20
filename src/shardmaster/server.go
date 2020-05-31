@@ -33,7 +33,7 @@ type ShardMaster struct {
 
 type Op struct {
 	// Your data here.
-	OpType    string
+	TxnType    string
 	Id		  int64
 	Gid		  int64
 	Servers   []string
@@ -226,13 +226,13 @@ func (sm* ShardMaster) PassOp(proposalOp Op) Config {
 }
 
 func (sm *ShardMaster) CommitOp(operation Op) Config {
-	if (operation.OpType == "Join") {
+	if (operation.TxnType == "Join") {
 		sm.CommitJoin(operation)
-	} else if (operation.OpType == "Leave") {
+	} else if (operation.TxnType == "Leave") {
 		sm.CommitLeave(operation)
-	} else if (operation.OpType == "Move") {
+	} else if (operation.TxnType == "Move") {
 		sm.CommitMove(operation)
-	} else if (operation.OpType == "Query") {
+	} else if (operation.TxnType == "Query") {
 		return sm.CommitQuery(operation)
 	}
 	//return &Config{}
@@ -255,7 +255,7 @@ func (sm *ShardMaster) Join(args *JoinArgs, reply *JoinReply) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	proposalOp := Op{OpType: "Join", Id: nrand(), Gid: args.GID, Servers: args.Servers}
+	proposalOp := Op{TxnType: "Join", Id: nrand(), Gid: args.GID, Servers: args.Servers}
 	sm.PassOp(proposalOp)
 	
 	return nil
@@ -277,7 +277,7 @@ func (sm *ShardMaster) Leave(args *LeaveArgs, reply *LeaveReply) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	proposalOp := Op{OpType: "Leave", Id: nrand(), Gid: args.GID}
+	proposalOp := Op{TxnType: "Leave", Id: nrand(), Gid: args.GID}
 	sm.PassOp(proposalOp)
 	
 	return nil
@@ -298,7 +298,7 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	proposalOp := Op{OpType: "Move", Id: nrand(), Gid: args.GID, ShardNum: args.Shard}
+	proposalOp := Op{TxnType: "Move", Id: nrand(), Gid: args.GID, ShardNum: args.Shard}
 	sm.PassOp(proposalOp)
 
 	return nil
@@ -317,7 +317,7 @@ func (sm *ShardMaster) Query(args *QueryArgs, reply *QueryReply) error {
 	sm.mu.Lock()
 	defer sm.mu.Unlock()
 
-	proposalOp := Op{OpType: "Query", Id: nrand(), ConfigNum: args.Num}
+	proposalOp := Op{TxnType: "Query", Id: nrand(), ConfigNum: args.Num}
 	config := sm.PassOp(proposalOp)
 
 	reply.Config = config
