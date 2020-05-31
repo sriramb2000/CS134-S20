@@ -48,6 +48,7 @@ type ShardKV struct {
 	gid int64 // my replica group ID
 
 	// Your definitions here.
+	mu2          sync.Mutex
 	currSeqNum   int
 	config       shardmaster.Config
 	db           map[string]string
@@ -233,16 +234,20 @@ func (kv *ShardKV) Reconfigure(latestConfigNum int) {
 // for the specified viewnum
 //
 func (kv *ShardKV) GetDBSnapshotAndOpHistory(args *DBSnapshotArgs, reply *DBSnapshotReply) error {
-	db, ok := kv.dbSnapshots[args.ConfigNum]
-	if ok {
-		reply.Database = make(map[string]string)
-		for k, v := range db {
-			reply.Database[k] = v
-		}
-		reply.OpHistory = make(map[int64]string)
-		for k, v := range kv.opHistory {
-			reply.OpHistory[k] = v
-		}
+	kv.mu2.Lock()
+	defer kv.mu2.Unlock()
+
+	if db, ok := kv.dbSnapshots[args.ConfigNum]; ok {
+		//reply.Database = make(map[string]string)
+		//for k, v := range db {
+		//	reply.Database[k] = v
+		//}
+		reply.Database = db
+		//reply.OpHistory = make(map[int64]string)
+		//for k, v := range kv.opHistory {
+		//	reply.OpHistory[k] = v
+		//}
+		reply.OpHistory = kv.opHistory
 		reply.Err = OK
 	} else {
 		reply.Err = ErrNoDB
