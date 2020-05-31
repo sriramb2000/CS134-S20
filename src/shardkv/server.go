@@ -147,34 +147,41 @@ func (kv* ShardKV) Consensify(seq int, val Op) Op {
 func (kv* ShardKV) CommitOp(operation Op) {
 	key, val, txnType, id, configNum := operation.Key, operation.Value, operation.TxnType, operation.Id, operation.ConfigNum
 	curVal, ok := kv.db[key]
-	res := ""
 	if txnType == "Reconfigure" {
 		kv.Reconfigure(operation.ConfigNum)
+		kv.opHistory[id] = ""
 	} else if kv.config.Num != configNum {
 		//println("server config num", kv.config.Num)
 		//println("client config num", configNum)
-		res = ErrWrongGroup
+		kv.opHistory[id] = ErrWrongGroup
 	} else if txnType == "Get" {
 		if ok {
-			res = curVal
+			//println("get, db key = ", key, ", val = ", curVal)
+			kv.opHistory[id] = curVal
 		} else {
-			res = ErrNoKey
+			kv.opHistory[id] = ErrNoKey
 		}
 	} else if txnType == "Put" {
 		//println("gid: ", kv.gid, " ,me: ", kv.me," ,put: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
 		kv.db[key] = val
-		res = OK
+		kv.opHistory[id] = OK
 	} else if txnType == "Append" {
+		res2, ok2 := kv.opHistory[id]
 		if ok {
-			//println("gid: ", kv.gid, " ,me: ", kv.me," ,append: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
-			kv.db[key] = curVal + val
+			if !ok2 || res2 != OK {
+				//println("gid: ", kv.gid, " ,me: ", kv.me, " ,append: ", curVal+val, " , curr config: ", kv.config.Num, ", opId: ", id)
+				kv.db[key] = curVal + val
+				kv.opHistory[id] = OK
+			} else {
+				//println("duplicate append, id = ", id)
+				kv.opHistory[id] = OK
+			}
 		} else {
 			//println("gid: ", kv.gid, " ,me: ", kv.me," ,appendput: ", val, " , curr config: ", kv.config.Num, ", opId: ", id)
 			kv.db[key] = val
+			kv.opHistory[id] = OK
 		}
-		res = OK
 	}
-	kv.opHistory[id] = res
 }
 
 func (kv *ShardKV) Reconfigure(latestConfigNum int) {
@@ -382,7 +389,7 @@ func StartServer(gid int64, shardmasters []string,
 func (kv *ShardKV) IsDuplicateGet(args *GetArgs) bool {
 	id := args.Id
 	res, ok := kv.opHistory[id]
-	//println("duplicate get", res)
+	//println("duplicate get, key = ", args.Key, ", res = ", res)
 	return ok && res != ErrWrongGroup
 }
 
