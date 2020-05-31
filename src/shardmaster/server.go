@@ -224,14 +224,14 @@ func (sm* ShardMaster) PassOp(proposalOp Op) Config {
 	return Config{}
 }
 
-func (sm *ShardMaster) CommitOp(operation Op) *Config {
-	if (Op.OpType == "Join") {
+func (sm *ShardMaster) CommitOp(operation Op) Config {
+	if (operation.OpType == "Join") {
 		sm.CommitJoin(operation)
-	} else if (Op.OpType == "Leave") {
+	} else if (operation.OpType == "Leave") {
 		sm.CommitLeave(operation)
-	} else if (Op.OpType == "Move") {
+	} else if (operation.OpType == "Move") {
 		sm.CommitMove(operation)
-	} else if (Op.OpType == "Query") {
+	} else if (operation.OpType == "Query") {
 		return sm.CommitQuery(operation)
 	}
 	return &Config{}
@@ -302,7 +302,7 @@ func (sm *ShardMaster) Move(args *MoveArgs, reply *MoveReply) error {
 	return nil
 }
 
-func (sm *ShardMaster) CommitQuery(operation Op) *Config{
+func (sm *ShardMaster) CommitQuery(operation Op) Config{
 	if (operation.ConfigNum == 0 || operation.ConfigNum > len(sm.configs)) { // If invalid config num, return latest known
 		return sm.configs[len(sm.configs) - 1]
 	} else {
