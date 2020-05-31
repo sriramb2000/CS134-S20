@@ -1,19 +1,22 @@
 package shardkv
 
-import "shardmaster"
-import "net/rpc"
-import "time"
-import "sync"
-import "fmt"
-import "crypto/rand"
-import "math/big"
+import (
+	"crypto/rand"
+	"fmt"
+	"math/big"
+	"net/rpc"
+	"shardmaster"
+	"sync"
+	"time"
+)
+
 
 type Clerk struct {
 	mu     sync.Mutex // one RPC at a time
 	sm     *shardmaster.Clerk
 	config shardmaster.Config
 	// You'll have to modify Clerk.
-	doneId int64
+	prevId int64  //  Piggybacking client requests already served by the server to provide at-most-once semantics
 }
 
 func nrand() int64 {
@@ -27,7 +30,7 @@ func MakeClerk(shardmasters []string) *Clerk {
 	ck := new(Clerk)
 	ck.sm = shardmaster.MakeClerk(shardmasters)
 	// You'll have to modify MakeClerk.
-	ck.doneId = -1
+	ck.prevId = -1
 	return ck
 }
 
@@ -88,26 +91,29 @@ func (ck *Clerk) Get(key string) string {
 	ck.mu.Lock()
 	defer ck.mu.Unlock()
 
-	// You'll have to modify PutAppend().
-	currId := nrand()  //  generate a unique id for this request
+	// Prepare the arguments
+	currId := nrand()  //  generate unique request ID to handle dup requests
+	args := &GetArgs{Key: key, CurrId: currId, PrevId: ck.prevId}
+	var reply GetReply
 
+	//  Send an RPC request, wait for the reply
 	for {
-		//println("GET")
+		//  Find which shard the specified key belongs to
 		shard := key2shard(key)
+		//  Get the replica group serving this shard
 		gid := ck.config.Shards[shard]
+		//  Get the servers of the replica group serving this shard
 		servers, ok := ck.config.Groups[gid]
 
 		if ok {
+			// try each server in the shard's replication group.
 			for _, srv := range servers {
-				args := &GetArgs{Key: key, Id: currId, DoneId: ck.doneId, Op: "Get", ConfigNum: ck.config.Num}
-				var reply GetReply
 				ok := call(srv, "ShardKV.Get", args, &reply)
 				if ok && (reply.Err == OK || reply.Err == ErrNoKey) {
-					ck.doneId = currId
+					ck.prevId = currId
 					return reply.Value
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
-					//println("GET WrongGroup")
 					break
 				}
 			}
@@ -125,30 +131,29 @@ func (ck *Clerk) PutAppend(key string, value string, op string) {
 	ck.mu.Lock()
 	defer ck.mu.Unlock()
 
-	// You'll have to modify PutAppend().
-	currId := nrand()  //  generate a unique id for this request
+	// Prepare the arguments
+	currId := nrand()  //  generate unique request ID to handle dup requests
+	args := &PutAppendArgs{Key: key, Value: value, Op: op, CurrId: currId, PrevId: ck.prevId}
+	var reply PutAppendReply
 
+	//  Send an RPC request, wait for the reply
 	for {
-		//println("PUTAPPEND")
+		//  Find which shard the specified key belongs to
 		shard := key2shard(key)
+		//  Get the replica group serving this shard
 		gid := ck.config.Shards[shard]
+		//  Get the servers of the replica group serving this shard
 		servers, ok := ck.config.Groups[gid]
 
 		if ok {
+			// try each server in the shard's replication group.
 			for _, srv := range servers {
-				args := &PutAppendArgs{Key: key, Value: value, Op: op, Id: currId, DoneId: ck.doneId, ConfigNum: ck.config.Num}
-				args.Key = key
-				args.Value = value
-				args.Op = op
-				var reply PutAppendReply
 				ok := call(srv, "ShardKV.PutAppend", args, &reply)
 				if ok && reply.Err == OK {
-					//println("success: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
-					ck.doneId = currId
+					ck.prevId = currId
 					return
 				}
 				if ok && (reply.Err == ErrWrongGroup) {
-					//println("fail: ", op, " :k, v = ", key, ", ",value, ", config: ", ck.config.Num, "id: ", currId)
 					break
 				}
 			}
