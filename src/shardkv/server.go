@@ -148,6 +148,7 @@ func (kv* ShardKV) CorrectShardForKey(key string, configNum int)  bool {
 
 // Actually Executes the Request, and caches the response
 func (kv* ShardKV) CommitOp(operation Op) {
+	txnType := operation.TxnType
 	if txnType == "Reconfigure" {
 		kv.CommitReconfigure(operation)
 	} else if txnType == "Get" {
