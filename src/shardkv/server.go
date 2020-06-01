@@ -52,8 +52,13 @@ type ShardKV struct {
 	currSeqNum   int
 	config       shardmaster.Config
 	db           map[string]string
-	dbSnapshots  map[int](map[string]string)
+	dbSnapshots  map[int]Snapshot
 	opHistory    map[int64]string
+}
+
+type Snapshot struct {
+	db        map[string]string
+	opHistory map[int64]string
 }
 
 func (kv *ShardKV) Get(args *GetArgs, reply *GetReply) error {
@@ -221,8 +226,12 @@ func (kv *ShardKV) CommitReconfigure(operation Op) {
 						currDBSnapshot[k] = v
 					}
 				}
+				currOpHistorySnapshot := make(map[int64]string)
+				for k, v := range kv.opHistory {
+					currOpHistorySnapshot[k] = v
+				}
 				kv.mu2.Lock()
-				kv.dbSnapshots[kv.config.Num] = currDBSnapshot
+				kv.dbSnapshots[kv.config.Num] = Snapshot{db: currDBSnapshot, opHistory: currOpHistorySnapshot}
 				kv.mu2.Unlock()
 	
 				//  Update db to next config
@@ -272,17 +281,17 @@ func (kv *ShardKV) GetDBSnapshotAndOpHistory(args *DBSnapshotArgs, reply *DBSnap
 	kv.mu2.Lock()
 	defer kv.mu2.Unlock()
 
-	if db, ok := kv.dbSnapshots[args.ConfigNum]; ok {
+	if snapshot, ok := kv.dbSnapshots[args.ConfigNum]; ok {
 		//reply.Database = make(map[string]string)
 		//for k, v := range db {
 		//	reply.Database[k] = v
 		//}
-		reply.Database = db
+		reply.Database = snapshot.db
 		//reply.OpHistory = make(map[int64]string)
 		//for k, v := range kv.opHistory {
 		//	reply.OpHistory[k] = v
 		//}
-		reply.OpHistory = kv.opHistory
+		reply.OpHistory = snapshot.opHistory
 		reply.Err = OK
 	} else {
 		reply.Err = ErrNoDB
