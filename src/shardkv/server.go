@@ -147,35 +147,29 @@ func (kv* ShardKV) Consensify(seq int, val Op) Op {
 func (kv* ShardKV) CommitOp(operation Op) {
 	key, val, txnType, id, configNum := operation.Key, operation.Value, operation.TxnType, operation.Id, operation.ConfigNum
 	curVal, ok := kv.db[key]
-	if txnType == "Reconfigure" {
+	if txnType == "Reconfigure" && !kv.IsDuplicateReconfig(id) {
 		kv.Reconfigure(operation.ConfigNum)
 		kv.opHistory[id] = ""
 	} else if kv.config.Num != configNum {
 		//println("server config num", kv.config.Num)
 		//println("client config num", configNum)
 		kv.opHistory[id] = ErrWrongGroup
-	} else if txnType == "Get" {
+	} else if txnType == "Get" && !kv.IsDuplicateGet(&GetArgs{Id: id}) {
 		if ok {
 			//println("get, db key = ", key, ", val = ", curVal)
 			kv.opHistory[id] = curVal
 		} else {
 			kv.opHistory[id] = ErrNoKey
 		}
-	} else if txnType == "Put" {
+	} else if txnType == "Put" && !kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id}) {
 		//println("gid: ", kv.gid, " ,me: ", kv.me," ,put: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
 		kv.db[key] = val
 		kv.opHistory[id] = OK
-	} else if txnType == "Append" {
-		res2, ok2 := kv.opHistory[id]
+	} else if txnType == "Append" && !kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id}) {
 		if ok {
-			if !ok2 || res2 != OK {
-				//println("gid: ", kv.gid, " ,me: ", kv.me, " ,append: ", curVal+val, " , curr config: ", kv.config.Num, ", opId: ", id)
-				kv.db[key] = curVal + val
-				kv.opHistory[id] = OK
-			} else {
-				//println("duplicate append, id = ", id)
-				kv.opHistory[id] = OK
-			}
+			//println("gid: ", kv.gid, " ,me: ", kv.me, " ,append: ", curVal+val, " , curr config: ", kv.config.Num, ", opId: ", id)
+			kv.db[key] = curVal + val
+			kv.opHistory[id] = OK
 		} else {
 			//println("gid: ", kv.gid, " ,me: ", kv.me," ,appendput: ", val, " , curr config: ", kv.config.Num, ", opId: ", id)
 			kv.db[key] = val
@@ -197,7 +191,9 @@ func (kv *ShardKV) Reconfigure(latestConfigNum int) {
 					currDBSnapshot[k] = v
 				}
 			}
+			kv.mu2.Lock()
 			kv.dbSnapshots[kv.config.Num] = currDBSnapshot
+			kv.mu2.Unlock()
 
 			//  Update db to next config
 			nextConfig := kv.sm.Query(kv.config.Num + 1)
@@ -272,7 +268,7 @@ func (kv *ShardKV) tick() {
 
 	newConfig := (kv.sm.Query(-1))
 	if kv.config.Num != newConfig.Num {
-		operation := Op{TxnType: "Reconfigure", ConfigNum: newConfig.Num, Id: -1}
+		operation := Op{TxnType: "Reconfigure", ConfigNum: newConfig.Num, Id: nrand()}
 		kv.PassOp(operation)
 	}
 }
@@ -384,6 +380,11 @@ func StartServer(gid int64, shardmasters []string,
 	return kv
 }
 
+// Assumes that another request with the same ID will not arrive before this request is cleared from history
+func (kv *ShardKV) IsDuplicateReconfig(id int64) bool {
+	res, ok := kv.opHistory[id]
+	return ok && res == OK
+}
 
 // Assumes that another request with the same ID will not arrive before this request is cleared from history
 func (kv *ShardKV) IsDuplicateGet(args *GetArgs) bool {
