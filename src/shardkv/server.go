@@ -61,8 +61,7 @@ func (kv *ShardKV) Get(args *GetArgs, reply *GetReply) error {
 	kv.mu.Lock()
 	defer kv.mu.Unlock()
 
-	shard := key2shard(args.Key)
-	if kv.config.Num != args.ConfigNum || kv.config.Shards[shard] != kv.gid {
+	if !kv.CorrectShardForKey(args.Key, args.ConfigNum) {
 		//println("server config num", kv.config.Num)
 		//println("client config num", args.ConfigNum)
 		reply.Err = ErrWrongGroup
@@ -85,7 +84,7 @@ func (kv *ShardKV) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 	defer kv.mu.Unlock()
 
 	shard := key2shard(args.Key)
-	if kv.config.Num != args.ConfigNum || kv.config.Shards[shard] != kv.gid {
+	if !kv.CorrectShardForKey(args.Key, args.ConfigNum) {
 		reply.Err = ErrWrongGroup
 		return nil
 	}
@@ -143,92 +142,127 @@ func (kv* ShardKV) Consensify(seq int, val Op) Op {
 	}
 }
 
+func (kv* ShardKV) CorrectShardForKey(key string, configNum int)  bool {
+	shard := key2shard(key)
+	return kv.config.Num == configNum && kv.config.Shards[shard] == kv.gid
+}
+
 // Actually Executes the Request, and caches the response
 func (kv* ShardKV) CommitOp(operation Op) {
 	key, val, txnType, id, configNum := operation.Key, operation.Value, operation.TxnType, operation.Id, operation.ConfigNum
 	curVal, ok := kv.db[key]
-	if txnType == "Reconfigure" && !kv.IsDuplicateReconfig(id) {
-		kv.Reconfigure(operation.ConfigNum)
-		kv.opHistory[id] = ""
-	} else if kv.config.Num != configNum {
-		//println("server config num", kv.config.Num)
-		//println("client config num", configNum)
-		kv.opHistory[id] = ErrWrongGroup
-	} else if txnType == "Get" && !kv.IsDuplicateGet(&GetArgs{Id: id}) {
-		if ok {
-			//println("get, db key = ", key, ", val = ", curVal)
-			kv.opHistory[id] = curVal
+	if txnType == "Reconfigure" {
+		kv.CommitReconfigure(operation)
+	} else if txnType == "Get" {
+		kv.CommitGet(operation)
+	} else if txnType == "Put" {
+		kv.CommitPut(operation)
+	} else if txnType == "Append" {
+		kv.CommitAppend(operation)
+	}
+}
+
+func (kv *ShardKV) CommitGet(operation Op) {
+	key, id, configNum := operation.Key, operation.Id, operation.ConfigNum
+	curVal, ok := kv.db[key]
+	if (!kv.IsDuplicateGet(&GetArgs{Id: id})) {
+		if (kv.CorrectShardForKey(key, configNum)) {
+			if ok {
+				kv.opHistory[id] = curVal
+			} else {
+				kv.opHistory[id] = ErrNoKey
+			}
 		} else {
-			kv.opHistory[id] = ErrNoKey
-		}
-	} else if txnType == "Put" && !kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id}) {
-		//println("gid: ", kv.gid, " ,me: ", kv.me," ,put: ", curVal + val, " , curr config: ", kv.config.Num, ", opId: ", id)
-		kv.db[key] = val
-		kv.opHistory[id] = OK
-	} else if txnType == "Append" && !kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id}) {
-		if ok {
-			//println("gid: ", kv.gid, " ,me: ", kv.me, " ,append: ", curVal+val, " , curr config: ", kv.config.Num, ", opId: ", id)
-			kv.db[key] = curVal + val
-			kv.opHistory[id] = OK
-		} else {
-			//println("gid: ", kv.gid, " ,me: ", kv.me," ,appendput: ", val, " , curr config: ", kv.config.Num, ", opId: ", id)
-			kv.db[key] = val
-			kv.opHistory[id] = OK
+			kv.opHistory[id] = ErrWrongGroup
 		}
 	}
 }
 
-func (kv *ShardKV) Reconfigure(latestConfigNum int) {
-	// update current DB until curr DB syncs with latest config
-	for kv.config.Num < latestConfigNum {
-		if kv.config.Num == 0 {
-			kv.config = kv.sm.Query(1)
+func (kv *ShardKV) CommitPut(operation Op) {
+	key, val, id, configNum := operation.Key, operation.Value, operation.Id, operation.ConfigNum
+	if (!kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id})) {
+		if (kv.CorrectShardForKey(key, configNum)) {
+			kv.db[key] = val
+			kv.opHistory[id] = OK
 		} else {
-			//  Save the current DB as a snapshot
-			currDBSnapshot := make(map[string]string)
-			for k, v := range kv.db {
-				if kv.config.Shards[key2shard(k)] == kv.gid {
-					currDBSnapshot[k] = v
-				}
+			kv.opHistory[id] = ErrWrongGroup
+		}
+	}
+}
+
+func (kv *ShardKV) CommitAppend(operation Op) {
+	key, val, id, configNum := operation.Key, operation.Value, operation.Id, operation.ConfigNum
+	curVal, ok := kv.db[key]
+	if (!kv.IsDuplicatePutAppend(&PutAppendArgs{Id: id})) {
+		if (kv.CorrectShardForKey(key, configNum)) {
+			if ok {
+				kv.db[key] = curVal + val
+				kv.opHistory[id] = OK
+			} else {
+				kv.db[key] = val
+				kv.opHistory[id] = OK
 			}
-			kv.mu2.Lock()
-			kv.dbSnapshots[kv.config.Num] = currDBSnapshot
-			kv.mu2.Unlock()
+		} else {
+			kv.opHistory[id] = ErrWrongGroup
+		}
+	}
+}
 
-			//  Update db to next config
-			nextConfig := kv.sm.Query(kv.config.Num + 1)
-			for shard, currGid := range kv.config.Shards {
-				nextGid := nextConfig.Shards[shard]
-				// if for the same shard, this shard is about to be served by me, then retrieve the data from its current server
-				if currGid != nextGid && nextGid == kv.gid {
-					done := false
-					//  Get the DB snapshot and OpHistory from the current server
-					for !done {
-						for _, server := range kv.config.Groups[currGid] {
-							args := &DBSnapshotArgs{kv.config.Num}
-							var reply DBSnapshotReply
-
-							// update DB and OpHistory
-							ok := call(server, "ShardKV.GetDBSnapshotAndOpHistory", args, &reply)
-							if ok && reply.Err == OK {
-								for k, v := range reply.Database {
-									kv.db[k] = v
+func (kv *ShardKV) CommitReconfigure(operation Op) {
+	id, latestConfigNum := operation.Id, operation.ConfigNum
+	// update current DB until curr DB syncs with latest config
+	if (!kv.IsDuplicateReconfig(id)){
+		for kv.config.Num < latestConfigNum {
+			if kv.config.Num == 0 {
+				kv.config = kv.sm.Query(1)
+			} else {
+				//  Save the current DB as a snapshot
+				currDBSnapshot := make(map[string]string)
+				for k, v := range kv.db {
+					if kv.config.Shards[key2shard(k)] == kv.gid {
+						currDBSnapshot[k] = v
+					}
+				}
+				kv.mu2.Lock()
+				kv.dbSnapshots[kv.config.Num] = currDBSnapshot
+				kv.mu2.Unlock()
+	
+				//  Update db to next config
+				nextConfig := kv.sm.Query(kv.config.Num + 1)
+				for shard, currGid := range kv.config.Shards {
+					nextGid := nextConfig.Shards[shard]
+					// if for the same shard, this shard is about to be served by me, then retrieve the data from its current server
+					if currGid != nextGid && nextGid == kv.gid {
+						done := false
+						//  Get the DB snapshot and OpHistory from the current server
+						for !done {
+							for _, server := range kv.config.Groups[currGid] {
+								args := &DBSnapshotArgs{kv.config.Num}
+								var reply DBSnapshotReply
+	
+								// update DB and OpHistory
+								ok := call(server, "ShardKV.GetDBSnapshotAndOpHistory", args, &reply)
+								if ok && reply.Err == OK {
+									for k, v := range reply.Database {
+										kv.db[k] = v
+									}
+									for k, v := range reply.OpHistory {
+										kv.opHistory[k] = v
+									}
+	
+									done = true
+									break
 								}
-								for k, v := range reply.OpHistory {
-									kv.opHistory[k] = v
-								}
-
-								done = true
-								break
 							}
 						}
 					}
 				}
+	
+				kv.config = nextConfig
 			}
-
-			kv.config = nextConfig
 		}
 	}
+	
 }
 
 //
