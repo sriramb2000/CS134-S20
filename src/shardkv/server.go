@@ -83,7 +83,6 @@ func (kv *ShardKV) PutAppend(args *PutAppendArgs, reply *PutAppendReply) error {
 	kv.mu.Lock()
 	defer kv.mu.Unlock()
 
-	shard := key2shard(args.Key)
 	if !kv.CorrectShardForKey(args.Key, args.ConfigNum) {
 		reply.Err = ErrWrongGroup
 		return nil
@@ -149,8 +148,6 @@ func (kv* ShardKV) CorrectShardForKey(key string, configNum int)  bool {
 
 // Actually Executes the Request, and caches the response
 func (kv* ShardKV) CommitOp(operation Op) {
-	key, val, txnType, id, configNum := operation.Key, operation.Value, operation.TxnType, operation.Id, operation.ConfigNum
-	curVal, ok := kv.db[key]
 	if txnType == "Reconfigure" {
 		kv.CommitReconfigure(operation)
 	} else if txnType == "Get" {
