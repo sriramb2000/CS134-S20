@@ -361,7 +361,7 @@ func StartServer(gid int64, shardmasters []string,
 	// Your initialization code here.
 	// Don't call Join().
 	kv.db = make(map[string]string)
-	kv.dbSnapshots = make(map[int](map[string]string))
+	kv.dbSnapshots = make(map[int]Snapshot)
 	kv.opHistory = make(map[int64]string)
 	kv.currSeqNum = 0
 	kv.config = kv.sm.Query(-1)
